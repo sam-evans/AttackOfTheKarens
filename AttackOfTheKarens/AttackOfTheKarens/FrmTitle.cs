@@ -13,7 +13,7 @@ namespace AttackOfTheKarens {
     private void FrmTitle_Load(object sender, EventArgs e) {
       Game.openForms.Add(this);
       player = new SoundPlayer();
-      player.SoundLocation = "data/karen music.wav";
+      player.SoundLocation = "data/trailer.wav";
       player.PlayLooping();
     }
 
@@ -22,6 +22,9 @@ namespace AttackOfTheKarens {
       FrmMall frmMall = new FrmMall();
       frmMall.Show();
       this.Hide();
+    }
+    private void btnMute_Click(object sender, EventArgs e) { 
+        player?.Stop();       
     }
 
     private void FrmTitle_FormClosed(object sender, FormClosedEventArgs e) {

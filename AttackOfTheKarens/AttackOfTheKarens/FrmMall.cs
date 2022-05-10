@@ -118,7 +118,7 @@ namespace AttackOfTheKarens {
       tmrKarenSpawner.Interval = rand.Next(1000, 5000);
       tmrKarenSpawner.Enabled = true;
       player = new SoundPlayer();
-      player.SoundLocation = "data/mall music.wav";
+      player.SoundLocation = "data/Spinning.wav";
       player.PlayLooping();
     }
 

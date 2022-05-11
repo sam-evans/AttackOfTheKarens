@@ -207,5 +207,22 @@ namespace AttackOfTheKarens {
     private void tmrUpdateGame_Tick(object sender, EventArgs e) {
       lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
     }
-  }
+
+        /// <summary>
+        /// Button Click to open/close the prestige menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PrestigeMenuButton_Click(object sender, EventArgs e)
+        {
+            PrestigeMenu popup = new PrestigeMenu();
+            DialogResult dialogresult = popup.ShowDialog();
+             if (dialogresult == DialogResult.Cancel)
+            {
+                Console.WriteLine("You clicked either Cancel or X button in the top right corner");
+            }
+            popup.Dispose();
+            
+        }
+    }
 }

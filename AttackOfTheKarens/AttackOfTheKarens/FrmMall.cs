@@ -246,5 +246,16 @@ namespace AttackOfTheKarens {
         //if the next frame is ready, replace the image in the picture box
         /* if (testAni.ImageReady()) { testPic.Image = testAni.GetImage(); } */
     }
-  }
+
+        private void PrestigeMenuButton_Click(object sender, EventArgs e)
+        {
+            PrestigeMenu popup = new PrestigeMenu();
+            DialogResult dialogresult = popup.ShowDialog();
+            if (dialogresult == DialogResult.Cancel)
+            {
+                Console.WriteLine("You clicked either Cancel or X button in the top right corner");
+            }
+            popup.Dispose();
+        }
+    }
 }

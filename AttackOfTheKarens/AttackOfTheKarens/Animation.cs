@@ -9,12 +9,12 @@ using System.Windows.Forms;
 namespace AttackOfTheKarens {
 
     /// <summary>
-    /// An animation contains a list of images. Each image must be added individually. Animations should be
+    /// A frame animation contains a list of images. Each image must be added individually. Animations should be
     /// Update()'ed each tick. After a certain amount of time has passed (int total_time), the current
     /// frame/image (curAni) of the animation will change to the next image in the list. Loops back to
     /// image 0 after the end of the list has been reached.
     /// </summary>
-    public class Animation {
+    public class FrameAnimation {
 
         //an animation contains a list of images
         private LinkedList<Image> imageList;
@@ -29,16 +29,16 @@ namespace AttackOfTheKarens {
         private int cur_time;
 
         //if cur_time has reached total_time, the next image is ready
-        private Boolean imageReady;
+        private bool imageReady;
 
         //once all desired frames of an animation have been 
-        private Boolean complete;
+        private bool complete;
 
         /// <summary>
         /// Create an animation where each frame lasts for the desired amount of time. 1 total_time = 0.1 seconds.
         /// </summary>
         /// <param name="total_time"></param>
-        public Animation(int total_time) {
+        public FrameAnimation(int total_time) {
             this.total_time = total_time;
 
             //default states
@@ -75,14 +75,9 @@ namespace AttackOfTheKarens {
         /// Return the image that is currently being used. Fails if ImageReady() returns false.
         /// </summary>
         /// <returns></returns>
-        public Image GetImage()
-        {
-
+        public Image GetImage() {
             if (!imageReady) { throw new Exception("Cannot call GetImage() if image is not available."); }
-
-            //image is being returned, so image is no longer ready
             imageReady = false;
-
             return imageList.ElementAt(curAni);
         }
 
@@ -95,7 +90,7 @@ namespace AttackOfTheKarens {
             //keep track of time
             if (cur_time < total_time) { cur_time++; }
 
-            //if total time has been reached, go to next image and set image to ready.
+            //if total time has been reached, reset timer, go to next image, and set image to ready.
             else {
                 cur_time = 0;
                 curAni++;
@@ -108,6 +103,89 @@ namespace AttackOfTheKarens {
         /// Returns true if the animation is ready to go to the next image (frame time is up).
         /// </summary>
         /// <returns></returns>
-        public Boolean ImageReady() { return imageReady; }
+        public bool ImageReady() { return imageReady; }
+    }
+
+    /// <summary>
+    /// A move animation calculates how far an image shoud move in a certain direction during a frame based on a given speed.
+    /// </summary>
+    public class MoveAnimation {
+
+        //where the image started
+        private int topStart;
+        private int leftStart;
+
+        //how far the image should move in total
+        private int dY;
+        private int dX;
+
+        //how far the image has moved so far
+        private float curY;
+        private float curX;
+
+        //how far the image will move this frame
+        private float moveY;
+        private float moveX;
+
+        //whether or not the animation is finished
+        private bool done;
+
+        /// <summary>
+        /// Create a move animation that allows an image to travel in a direction based on the given speed. Give this object the
+        /// starting position of the image, how far it should move in total, and the speed that the image should move. Speed is a
+        /// percentage. An image will move at the given percentage of the total given distance every frame.
+        /// </summary>
+        /// <param name="topStart"></param>
+        /// <param name="leftStart"></param>
+        /// <param name="dY"></param>
+        /// <param name="dX"></param>
+        /// <param name="speed"></param>
+        /// <exception cref="Exception"></exception>
+        public MoveAnimation(int topStart, int leftStart, int dY, int dX, float speed) {
+
+            //speed is a percentage of the total distance and should not be negative or above 100. 
+            if (speed > 100 || speed < 0) { throw new Exception("Speed must be in between 0 and 100 percent."); }
+
+            this.topStart = topStart;
+            this.leftStart = leftStart;
+            this.curY = 0;
+            this.curX = 0;
+            this.dY = dY;
+            this.dX = dX;
+
+            //calculate how far the image should move every frame based off speed
+            this.moveY = dY * speed / 100;
+            this.moveX = dX * speed / 100;
+
+            //animation does not begin done
+            this.done = false;
+        }
+
+        /// <summary>
+        /// Update this animation every tick. Update() will calculate how far the image should move, and whether or not
+        /// the animation has finished yet.
+        /// </summary>
+        public void Update() {
+            curY = curY + moveY;
+            curX = curX + moveX;
+
+            if (curX > dX && dX > 0 || curY > dY && dY > 0 || curX < dX && dX < 0 || curY < dY && dY < 0) { curX = dX; curY = dY; done = true; }
+        }
+
+        /// <summary>
+        /// Get the current Y position of the image.
+        /// </summary>
+        /// <returns></returns>
+        public int GetTop() { return (int) (topStart + curY); }
+        /// <summary>
+        /// Get the current X position of the image.
+        /// </summary>
+        /// <returns></returns>
+        public int GetLeft() { return (int) (leftStart + curX); }
+        /// <summary>
+        /// Determine whether or not the animation has finished.
+        /// </summary>
+        /// <returns></returns>
+        public bool isDone() { return done; }
     }
 }

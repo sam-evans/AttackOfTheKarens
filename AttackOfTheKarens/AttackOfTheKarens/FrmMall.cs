@@ -24,6 +24,10 @@ namespace AttackOfTheKarens {
     private char[][] map;
     private List<Store> stores;
 
+    //test animation object
+    private PictureBox testPic;
+    private Animation testAni;
+
     // ctor
     public FrmMall() {
       Game.openForms.Add(this);
@@ -60,6 +64,22 @@ namespace AttackOfTheKarens {
       panMall.Controls.Clear();
       int top = 0;
       int left = 0;
+
+      //create a new animation
+      //this animation will update every 1 * 0.1 seconds.
+      testAni = new Animation(10);
+
+      //add the images for 1, 2 and 3 to the animation
+      testAni.Add(Properties.Resources.one);
+      testAni.Add(Properties.Resources.two);
+      testAni.Add(Properties.Resources.three);
+
+      //create a picture box. the image inside the picture box gets replaced
+      //by images in the animations object
+      testPic = CreatePic(testAni.Complete(), 0, 0);
+
+      //add the picture box to the mall control.
+      /* panMall.Controls.Add(testPic); */
 
       PictureBox pic = null;
       foreach (char[] array in map) {
@@ -206,6 +226,25 @@ namespace AttackOfTheKarens {
 
     private void tmrUpdateGame_Tick(object sender, EventArgs e) {
       lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
+    }
+
+    private void panMall_Paint(object sender, PaintEventArgs e)
+    {
+
+    }
+
+    /// <summary>
+    /// Update animations every 100ms.
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void tmrAnimationsUpdate_Tick(object sender, EventArgs e)
+    {
+        //update the animation so it knows when to go to the next frame
+        testAni.Update();
+
+        //if the next frame is ready, replace the image in the picture box
+        /* if (testAni.ImageReady()) { testPic.Image = testAni.GetImage(); } */
     }
   }
 }

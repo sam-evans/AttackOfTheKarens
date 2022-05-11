@@ -28,12 +28,12 @@ namespace AttackOfTheKarens
             if (CheckIfCanPrestige())
             {
                 Game.PrestigeMoneyMultiplier *= 2;
-                //TODO: Need to do some kind of game reset function when an upgrade is selceted.
+                ResetAfterPrestige();
             }
             // If the user cannot prestige yet, it shows a warning message.
             else
             {
-                DiableButtonsUntilPrestigeIsAvalible();
+                PrestigeNotEnoughMoneyText.Visible = true;
             }
 
         }
@@ -76,14 +76,13 @@ namespace AttackOfTheKarens
             }
         }
 
-        private void DiableButtonsUntilPrestigeIsAvalible()
+        /// <summary>
+        /// Resets the game except for the prestige upgrades. Increases the condition to get the next prestige
+        /// </summary>
+        private void ResetAfterPrestige()
         {
-            PrestigeNotEnoughMoneyText.Visible = true;
-            // If the user still has the window open by the time they can prestige, it hides the warning
-            if (CheckIfCanPrestige())
-            {
-                PrestigeNotEnoughMoneyText.Visible = false;
-            }
+            Game.PrestigeMenuCondition *= 10;
+            Game.Score = 0;
         }
 
     }

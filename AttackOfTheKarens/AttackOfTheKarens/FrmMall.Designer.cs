@@ -25,13 +25,13 @@
     private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.panMall = new System.Windows.Forms.Panel();
+            this.tmrAnimationsUpdate = new System.Windows.Forms.Timer(this.components);
             this.tmrKarenSpawner = new System.Windows.Forms.Timer(this.components);
             this.tmrUpdateKarens = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveOwner = new System.Windows.Forms.Timer(this.components);
             this.lblMoneySaved = new System.Windows.Forms.Label();
             this.lblMoneySavedLabel = new System.Windows.Forms.Label();
             this.tmrUpdateGame = new System.Windows.Forms.Timer(this.components);
-            this.PrestigeMenuButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panMall
@@ -42,6 +42,13 @@
             this.panMall.Name = "panMall";
             this.panMall.Size = new System.Drawing.Size(561, 539);
             this.panMall.TabIndex = 0;
+            this.panMall.Paint += new System.Windows.Forms.PaintEventHandler(this.panMall_Paint);
+            //
+            // tmrAnimationUpdate
+            //
+            this.tmrAnimationsUpdate.Enabled = true;
+            this.tmrAnimationsUpdate.Interval = 100;
+            this.tmrAnimationsUpdate.Tick += new System.EventHandler(this.tmrAnimationsUpdate_Tick);
             // 
             // tmrKarenSpawner
             // 
@@ -88,17 +95,6 @@
             this.tmrUpdateGame.Enabled = true;
             this.tmrUpdateGame.Tick += new System.EventHandler(this.tmrUpdateGame_Tick);
             // 
-            // PrestigeMenuButton
-            // 
-            this.PrestigeMenuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.PrestigeMenuButton.Location = new System.Drawing.Point(1084, 357);
-            this.PrestigeMenuButton.Name = "PrestigeMenuButton";
-            this.PrestigeMenuButton.Size = new System.Drawing.Size(75, 23);
-            this.PrestigeMenuButton.TabIndex = 3;
-            this.PrestigeMenuButton.Text = "Prestige";
-            this.PrestigeMenuButton.UseVisualStyleBackColor = true;
-            this.PrestigeMenuButton.Click += new System.EventHandler(this.PrestigeMenuButton_Click);
-            // 
             // FrmMall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -106,7 +102,6 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1171, 698);
-            this.Controls.Add(this.PrestigeMenuButton);
             this.Controls.Add(this.lblMoneySavedLabel);
             this.Controls.Add(this.lblMoneySaved);
             this.Controls.Add(this.panMall);
@@ -130,6 +125,10 @@
     private System.Windows.Forms.Label lblMoneySaved;
     private System.Windows.Forms.Label lblMoneySavedLabel;
     private System.Windows.Forms.Timer tmrUpdateGame;
-        private System.Windows.Forms.Button PrestigeMenuButton;
-    }
+
+    /// <summary>
+    /// Tick timer for animations. Executes every 100ms.
+    /// </summary>
+    private System.Windows.Forms.Timer tmrAnimationsUpdate;
+  }
 }

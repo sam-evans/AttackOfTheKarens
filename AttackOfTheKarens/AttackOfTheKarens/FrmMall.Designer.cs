@@ -24,7 +24,7 @@
     /// </summary>
     private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.panMall = new System.Windows.Forms.Panel();
+            this.panMall = new DBPanel();
             this.tmrAnimationsUpdate = new System.Windows.Forms.Timer(this.components);
             this.tmrKarenSpawner = new System.Windows.Forms.Timer(this.components);
             this.tmrUpdateKarens = new System.Windows.Forms.Timer(this.components);
@@ -36,7 +36,7 @@
             this.SuspendLayout();
             // 
             // panMall
-            // 
+            //
             this.panMall.BackColor = System.Drawing.Color.Transparent;
             this.panMall.BackgroundImage = global::AttackOfTheKarens.Properties.Resources.mall_bg;
             this.panMall.Location = new System.Drawing.Point(12, 12);
@@ -130,7 +130,7 @@
 
     #endregion
 
-    private System.Windows.Forms.Panel panMall;
+    private DBPanel panMall;
     private System.Windows.Forms.Timer tmrKarenSpawner;
     private System.Windows.Forms.Timer tmrUpdateKarens;
     private System.Windows.Forms.Timer tmrMoveOwner;
@@ -143,5 +143,14 @@
     /// </summary>
     private System.Windows.Forms.Timer tmrAnimationsUpdate;
         private System.Windows.Forms.Button PrestigeMenuButton;
+    }
+
+    /// <summary>
+    /// A double buffered panel that flickers much less than an normal panel.
+    /// </summary>
+    public class DBPanel : System.Windows.Forms.Panel {
+        public DBPanel() : base() {
+            DoubleBuffered = true;
+        }
     }
 }

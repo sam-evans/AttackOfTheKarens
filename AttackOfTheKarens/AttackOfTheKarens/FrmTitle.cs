@@ -9,11 +9,11 @@ namespace AttackOfTheKarens {
     public FrmTitle() {
       InitializeComponent();
     }
-
+    //A COMMENT THAT SHOULD STAY HERE
     private void FrmTitle_Load(object sender, EventArgs e) {
       Game.openForms.Add(this);
       player = new SoundPlayer();
-      player.SoundLocation = "data/trailer.wav";
+      player.SoundLocation = "data/Karen music.wav";
       player.PlayLooping();
     }
 

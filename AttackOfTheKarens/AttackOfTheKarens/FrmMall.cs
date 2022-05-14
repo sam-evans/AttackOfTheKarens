@@ -254,7 +254,6 @@ namespace AttackOfTheKarens {
                     if (store.IsDefeated()) {
                         BeginDollarAnimation(store.GetTop(), store.GetLeft());
                         store.Reset();
-                        System.Diagnostics.Debug.Write("test");
                     }
                 }
             }

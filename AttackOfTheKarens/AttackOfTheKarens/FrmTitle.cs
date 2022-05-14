@@ -6,6 +6,7 @@ using System.Windows.Forms;
 namespace AttackOfTheKarens {
   public partial class FrmTitle : Form {
     SoundPlayer? player;
+        int i = 0;
     public FrmTitle() {
       InitializeComponent();
     }
@@ -13,7 +14,7 @@ namespace AttackOfTheKarens {
     private void FrmTitle_Load(object sender, EventArgs e) {
       Game.openForms.Add(this);
       player = new SoundPlayer();
-      player.SoundLocation = "data/Karen music.wav";
+      player.SoundLocation = "data/trailer.wav";
       player.PlayLooping();
     }
 
@@ -23,8 +24,18 @@ namespace AttackOfTheKarens {
       frmMall.Show();
       this.Hide();
     }
-    private void btnMute_Click(object sender, EventArgs e) { 
-        player?.Stop();       
+    private void btnMute_Click(object sender, EventArgs e) {
+            if (i == 0)
+            {
+                player?.Stop();
+                i++;
+            }
+            else
+            {
+                player?.Play(); 
+                i--;
+            }
+               
     }
 
     private void FrmTitle_FormClosed(object sender, FormClosedEventArgs e) {

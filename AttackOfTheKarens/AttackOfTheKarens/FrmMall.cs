@@ -19,6 +19,7 @@ namespace AttackOfTheKarens {
 
         // other privates
         private SoundPlayer player;
+        private SoundPlayer player1;
         private PictureBox picOwner;
         private int xOwner;
         private int yOwner;
@@ -204,11 +205,13 @@ namespace AttackOfTheKarens {
         /// <param name="x"></param>
         private void BeginDollarAnimation(int y, int x) {
 
+            
             //create dollar sign picture box if it isnt created already
             if (dollarSign == null) { dollarSign = CreatePic(Properties.Resources.dollarSign, 0, 0); }
 
             //create a new animation for the sign at the given starting position
             dollarAni = new MoveAnimation(y, x, -32, 0, 10);
+           
 
             //set the dollar sign to the starting position
             dollarSign.Top = dollarAni.GetTop();
@@ -220,6 +223,7 @@ namespace AttackOfTheKarens {
             //set the sign visible and at the front
             dollarSign.Visible = true;
             dollarSign.BringToFront();
+            
         }
 
         private void FrmMall_KeyUp(object sender, KeyEventArgs e) {
@@ -303,6 +307,20 @@ namespace AttackOfTheKarens {
                 Console.WriteLine("You clicked either Cancel or X button in the top right corner");
             }
             popup.Dispose();
+        }
+        int i = 0;
+       private void MuteButton_Click(object sender, EventArgs e)
+        {
+            if (i == 0)
+            {
+                player?.Stop();
+                i++;
+            }
+            else
+            {
+                player?.Play();
+                i--;
+            }
         }
     }
 }

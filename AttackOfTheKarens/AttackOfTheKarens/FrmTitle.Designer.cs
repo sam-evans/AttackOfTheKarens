@@ -23,6 +23,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+
       
         this.btnStart = new System.Windows.Forms.Button();
         this.btnMute = new System.Windows.Forms.Button();

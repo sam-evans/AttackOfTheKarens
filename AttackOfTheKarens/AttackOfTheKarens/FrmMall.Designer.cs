@@ -1,4 +1,6 @@
-﻿namespace AttackOfTheKarens {
+﻿using System.Windows.Forms;
+
+namespace AttackOfTheKarens {
   partial class FrmMall {
     /// <summary>
     ///  Required designer variable.
@@ -33,6 +35,7 @@
             this.lblMoneySavedLabel = new System.Windows.Forms.Label();
             this.tmrUpdateGame = new System.Windows.Forms.Timer(this.components);
             this.PrestigeMenuButton = new System.Windows.Forms.Button();
+            this.MuteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panMall
@@ -105,6 +108,24 @@
             this.PrestigeMenuButton.Text = "Prestige";
             this.PrestigeMenuButton.UseVisualStyleBackColor = true;
             this.PrestigeMenuButton.Click += new System.EventHandler(this.PrestigeMenuButton_Click);
+
+            // 
+            // MuteButton 
+            //
+            this.MuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.MuteButton.Location = new System.Drawing.Point(1084, 650);
+            this.MuteButton.Name = "MuteButton";
+            this.MuteButton.Size = new System.Drawing.Size(75, 23);
+            this.MuteButton.TabIndex = 3;
+            this.MuteButton.Text = "Mute";
+            this.MuteButton.UseVisualStyleBackColor = true;
+            this.MuteButton.Click += new System.EventHandler(this.MuteButton_Click);
+            this.MuteButton.Visible = true;
+
+
+
+
+
             // 
             // FrmMall
             // 
@@ -113,6 +134,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1171, 698);
+            this.Controls.Add(this.MuteButton);
             this.Controls.Add(this.PrestigeMenuButton);
             this.Controls.Add(this.lblMoneySavedLabel);
             this.Controls.Add(this.lblMoneySaved);
@@ -142,7 +164,9 @@
     /// Tick timer for animations. Executes every 100ms.
     /// </summary>
     private System.Windows.Forms.Timer tmrAnimationsUpdate;
-        private System.Windows.Forms.Button PrestigeMenuButton;
+    private System.Windows.Forms.Button PrestigeMenuButton;
+        private Button MuteButton;
+        private System.Windows.Forms.Button Mute;
     }
 
     /// <summary>

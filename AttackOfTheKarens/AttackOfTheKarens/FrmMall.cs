@@ -92,7 +92,7 @@ namespace AttackOfTheKarens {
                 foreach (char c in array) {
                     switch (c) {
                         case 'K':
-                            pic = CreatePic(Properties.Resources.karen, top, left);
+                            pic = pic = CreatePic(Properties.Resources.karen0, top, left);
                             Store s = new Store(new Karen(pic) {
                             Row = top / CELL_SIZE,
                             Col = left / CELL_SIZE,
@@ -247,6 +247,15 @@ namespace AttackOfTheKarens {
         private void tmrKarenSpawner_Tick(object sender, EventArgs e) {
             Store s = stores[rand.Next(stores.Count)];
             s.ActivateTheKaren();
+
+            //set karen image based off of karen level
+            int level = s.GetLevel();
+            Image img;
+            if (level == 0) { img = Properties.Resources.karen0; }
+            else if (level == 1) { img = Properties.Resources.karen1; }
+            else if (level == 2) { img = Properties.Resources.karen2; }
+            else { img = Properties.Resources.karen3; }
+            s.GetKarenPB().Image = img;
         }
 
         private void FrmMall_FormClosed(object sender, FormClosedEventArgs e) {

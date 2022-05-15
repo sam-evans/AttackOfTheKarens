@@ -38,6 +38,8 @@ namespace KarenLogic {
             //set a random level from 0 to 3
             System.Random random = new System.Random();
             this.Level = random.Next(0, 4);
+
+            this.Health = 20 + 20 * Level;
         }
 
         public void Damage(int amount) {
@@ -50,7 +52,8 @@ namespace KarenLogic {
                 int randI = random.Next(4, 7);
 
                 //score is multiplied based off of karen level
-                float score = (randI+randF)*Level;
+                float score = randI+randF;
+                score = score + score * Level;
 
                 Game.AddToScore(score);
                 this.Score = score;

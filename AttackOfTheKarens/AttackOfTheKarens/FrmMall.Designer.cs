@@ -33,6 +33,11 @@ namespace AttackOfTheKarens {
             this.tmrMoveOwner = new System.Windows.Forms.Timer(this.components);
             this.lblMoneySaved = new System.Windows.Forms.Label();
             this.lblMoneySavedLabel = new System.Windows.Forms.Label();
+            this.lblMoneyFeed1 = new System.Windows.Forms.Label();
+            this.lblMoneyFeed2 = new System.Windows.Forms.Label();
+            this.lblMoneyFeed3 = new System.Windows.Forms.Label();
+            this.lblMoneyFeed4 = new System.Windows.Forms.Label();
+            this.lblMoneyFeed5 = new System.Windows.Forms.Label();
             this.tmrUpdateGame = new System.Windows.Forms.Timer(this.components);
             this.PrestigeMenuButton = new System.Windows.Forms.Button();
             this.MuteButton = new System.Windows.Forms.Button();
@@ -78,7 +83,7 @@ namespace AttackOfTheKarens {
             this.lblMoneySaved.Name = "lblMoneySaved";
             this.lblMoneySaved.Size = new System.Drawing.Size(98, 32);
             this.lblMoneySaved.TabIndex = 1;
-            this.lblMoneySaved.Text = "$ 00.00";
+            this.lblMoneySaved.Text = "$ 0.00";
             this.lblMoneySaved.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblMoneySavedLabel
@@ -92,6 +97,66 @@ namespace AttackOfTheKarens {
             this.lblMoneySavedLabel.TabIndex = 2;
             this.lblMoneySavedLabel.Text = "Money Saved:";
             this.lblMoneySavedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblMoneyFeed1
+            //
+            this.lblMoneyFeed1.AutoSize = true;
+            this.lblMoneyFeed1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMoneyFeed1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.lblMoneyFeed1.Location = new System.Drawing.Point(1075, -1);
+            this.lblMoneyFeed1.Name = "lblMoneyFeed1";
+            this.lblMoneyFeed1.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed1.TabIndex = 1;
+            this.lblMoneyFeed1.Text = "";
+            this.lblMoneyFeed1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblMoneyFeed2
+            //
+            this.lblMoneyFeed2.AutoSize = true;
+            this.lblMoneyFeed2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMoneyFeed2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.lblMoneyFeed2.Location = new System.Drawing.Point(1075, -1);
+            this.lblMoneyFeed2.Name = "lblMoneyFeed2";
+            this.lblMoneyFeed2.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed2.TabIndex = 1;
+            this.lblMoneyFeed2.Text = "";
+            this.lblMoneyFeed2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblMoneyFeed3
+            //
+            this.lblMoneyFeed3.AutoSize = true;
+            this.lblMoneyFeed3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMoneyFeed3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.lblMoneyFeed3.Location = new System.Drawing.Point(1075, -1);
+            this.lblMoneyFeed3.Name = "lblMoneyFeed3";
+            this.lblMoneyFeed3.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed3.TabIndex = 1;
+            this.lblMoneyFeed3.Text = "";
+            this.lblMoneyFeed3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblMoneyFeed4
+            //
+            this.lblMoneyFeed4.AutoSize = true;
+            this.lblMoneyFeed4.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMoneyFeed4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.lblMoneyFeed4.Location = new System.Drawing.Point(1075, -1);
+            this.lblMoneyFeed4.Name = "lblMoneyFeed4";
+            this.lblMoneyFeed4.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed4.TabIndex = 1;
+            this.lblMoneyFeed4.Text = "";
+            this.lblMoneyFeed4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblMoneyFeed5
+            //
+            this.lblMoneyFeed5.AutoSize = true;
+            this.lblMoneyFeed5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMoneyFeed5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.lblMoneyFeed5.Location = new System.Drawing.Point(1075, -1);
+            this.lblMoneyFeed5.Name = "lblMoneyFeed5";
+            this.lblMoneyFeed5.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed5.TabIndex = 1;
+            this.lblMoneyFeed5.Text = "";
+            this.lblMoneyFeed5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tmrUpdateGame
             // 
@@ -138,6 +203,11 @@ namespace AttackOfTheKarens {
             this.Controls.Add(this.PrestigeMenuButton);
             this.Controls.Add(this.lblMoneySavedLabel);
             this.Controls.Add(this.lblMoneySaved);
+            this.Controls.Add(this.lblMoneyFeed1);
+            this.Controls.Add(this.lblMoneyFeed2);
+            this.Controls.Add(this.lblMoneyFeed3);
+            this.Controls.Add(this.lblMoneyFeed4);
+            this.Controls.Add(this.lblMoneyFeed5);
             this.Controls.Add(this.panMall);
             this.Name = "FrmMall";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -158,6 +228,11 @@ namespace AttackOfTheKarens {
     private System.Windows.Forms.Timer tmrMoveOwner;
     private System.Windows.Forms.Label lblMoneySaved;
     private System.Windows.Forms.Label lblMoneySavedLabel;
+    private System.Windows.Forms.Label lblMoneyFeed1;
+    private System.Windows.Forms.Label lblMoneyFeed2;
+    private System.Windows.Forms.Label lblMoneyFeed3;
+    private System.Windows.Forms.Label lblMoneyFeed4;
+    private System.Windows.Forms.Label lblMoneyFeed5;
     private System.Windows.Forms.Timer tmrUpdateGame;
 
     /// <summary>

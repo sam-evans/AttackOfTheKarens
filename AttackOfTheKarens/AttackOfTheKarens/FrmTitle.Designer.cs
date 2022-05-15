@@ -51,9 +51,9 @@
         this.btnMute.Text = "Mute";
         this.btnMute.UseVisualStyleBackColor = true;
         this.btnMute.Click += new System.EventHandler(this.btnMute_Click);
-            //
-            // FrmTitle
-            // 
+        //
+        // FrmTitle
+        // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.BackColor = System.Drawing.Color.Black;

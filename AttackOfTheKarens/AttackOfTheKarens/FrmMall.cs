@@ -25,12 +25,12 @@ namespace AttackOfTheKarens {
         private int yOwner;
         private char[][] map;
         private List<Store> stores;
+        private bool[] feedAssigned = { false, false, false, false, false };
+        private Label[] feedLabels = new Label[5];
 
-        //test frame animation object
+        //animations
         private PictureBox testPic;
         private FrameAnimation testAni;
-
-        //dollar sign picture box and animation
         private PictureBox? dollarSign;
         private MoveAnimation? dollarAni;
 
@@ -131,10 +131,19 @@ namespace AttackOfTheKarens {
             panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
             this.Width = panMall.Width + FORM_PADDING + 75;
             this.Height = panMall.Height + FORM_PADDING;
-            lblMoneySaved.Left = this.Width - lblMoneySaved.Width - 10;
-            lblMoneySavedLabel.Left = this.Width - lblMoneySavedLabel.Width - 10;
+            lblMoneySaved.Left = this.Width - 150;
+            lblMoneySavedLabel.Left = this.Width - 150;
             lblMoneySavedLabel.Top = 0;
             lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
+            feedLabels[0] = lblMoneyFeed1;
+            feedLabels[1] = lblMoneyFeed2;
+            feedLabels[2] = lblMoneyFeed3;
+            feedLabels[3] = lblMoneyFeed4;
+            feedLabels[4] = lblMoneyFeed5;
+            for (int n=0; n<feedLabels.Length; n++) {
+                feedLabels[n].Left = this.Width - 150;
+                feedLabels[n].Top = lblMoneySavedLabel.Height + 40 + 30 * n;
+            }
         }
 
         private void FrmMall_Load(object sender, EventArgs e) {
@@ -251,9 +260,27 @@ namespace AttackOfTheKarens {
                     store.Update();
 
                     //if a karen was just defeated, begin dollar sign animation and set karen back to not defeated
+                    //also, add money earned to money feed
                     if (store.IsDefeated()) {
                         BeginDollarAnimation(store.GetTop(), store.GetLeft());
                         store.Reset();
+
+                        //if not all 3 feed text fields have been assigned yet, then assign one by one
+                        if (!feedAssigned[4]) {
+                            for (int n=0; n<feedAssigned.Length; n++) {
+                                if (!feedAssigned[n]) {
+                                    feedAssigned[n] = true;
+                                    feedLabels[n].Text = store.GetScore().ToString("+ $ #,##0.00");
+                                    break;
+                                }
+                            }
+                        }
+
+                        //if all 3 fields have been assigned, "scroll" the feed
+                        else {
+                            for (int n=0; n<feedAssigned.Length-1; n++) { feedLabels[n].Text = feedLabels[n+1].Text; }
+                            feedLabels[4].Text = store.GetScore().ToString("+ $ #,##0.00");
+                        }
                     }
                 }
             }

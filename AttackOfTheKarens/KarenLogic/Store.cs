@@ -26,6 +26,10 @@
         /// Reset the Karen back to not defeated.
         /// </summary>
         public void Reset() { this.karen.Reset(); }
+        /// <summary>
+        /// Gets how much money the defeated Karen earned you.
+        /// </summary>
+        public float GetScore() { return this.karen.GetScore(); }
 
         public void ActivateTheKaren() {
             karen.Appear();

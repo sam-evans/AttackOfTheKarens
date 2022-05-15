@@ -15,6 +15,8 @@ namespace KarenLogic {
         public int Health { get; private set; }
         public bool IsPresent { get; private set; }
 
+        public float score = 0;
+
         /// <summary>
         /// If a Karen has just been defeated, this will return true until the dollar animation has begun.
         /// </summary>
@@ -46,7 +48,15 @@ namespace KarenLogic {
         public void Damage(int amount) {
             Health -= amount;
             if (Health < 0) {
-                Game.AddToScore(5.95f);
+                
+                //create a random score from 4 to 6 dollars.
+                System.Random random = new System.Random();
+                float randF = (float)random.NextDouble();
+                int randI = random.Next(4, 7);
+                float score = randI+randF;
+
+                Game.AddToScore(score);
+                this.score = score;
                 this.pic.Visible = false;
                 this.IsPresent = false;
                 this.IsDefeated = true;
@@ -67,5 +77,10 @@ namespace KarenLogic {
         /// Set the Karen back to not defeated.
         /// </summary>
         public void Reset() { this.IsDefeated = false; }
+        /// <summary>
+        /// Gets how much money the defeated Karen earned you.
+        /// </summary>
+        /// <returns></returns>
+        public float GetScore() { return score; }
     }
 }

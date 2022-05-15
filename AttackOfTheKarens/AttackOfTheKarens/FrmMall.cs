@@ -85,7 +85,7 @@ namespace AttackOfTheKarens {
             testPic = CreatePic(testAni.Complete(), 0, 0);
 
             //add the picture box to the mall control.
-            panMall.Controls.Add(testPic);
+            /* panMall.Controls.Add(testPic); */
 
             PictureBox pic = null;
             foreach (char[] array in map) {

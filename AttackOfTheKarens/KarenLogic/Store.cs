@@ -23,6 +23,10 @@ namespace KarenLogic {
         public float GetScore() { return this.karen.Score; }
         public int GetLevel() { return this.karen.Level; }
         public PictureBox GetKarenPB() { return this.karen.pic; }
+        public PictureBox GetHealthPB() { return this.karen.health; }
+
+        //determine what image the health bar should be
+        public int getHealthBars() { return this.karen.Health * 8 / this.karen.maxHealth; }
 
         //spawn a karen
         public void ActivateTheKaren() { karen.Appear(); }

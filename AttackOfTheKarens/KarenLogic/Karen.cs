@@ -10,6 +10,7 @@ namespace KarenLogic {
         public int Row { get; set; }
         public int Col { get; set; }
         public int Health { get; private set; }
+        public int maxHealth;
         public bool IsPresent { get; private set; }
         public bool IsDefeated { get; private set; }
         public int Level { get; private set; }
@@ -20,18 +21,23 @@ namespace KarenLogic {
         public void Reset() { this.IsDefeated = false; }
 
         public PictureBox pic;
-        public Karen(PictureBox pic) {
+        public PictureBox health;
+        public Karen(PictureBox pic, PictureBox health) {
             this.pic = pic;
+            this.health = health;
             this.pic.Visible = false;
+            this.health.Visible = false;
             this.IsPresent = false;
             this.IsDefeated = false;
             this.Health = 10;
+            this.maxHealth = this.Health;
         }
 
         public void Appear() {
             if (this.IsPresent) { return; }
 
             this.pic.Visible = true;
+            this.health.Visible = true;
             this.IsPresent = true;
             this.pic.BringToFront();
 
@@ -40,6 +46,7 @@ namespace KarenLogic {
             this.Level = random.Next(0, 4);
 
             this.Health = 20 + 20 * Level;
+            this.maxHealth = this.Health;
         }
 
         public void Damage(int amount) {
@@ -59,6 +66,7 @@ namespace KarenLogic {
                 Game.AddToScore(score);
                 this.Score = score;
                 this.pic.Visible = false;
+                this.health.Visible = false;
                 this.IsPresent = false;
                 this.IsDefeated = true;
             }

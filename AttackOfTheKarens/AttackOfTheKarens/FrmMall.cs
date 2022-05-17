@@ -26,7 +26,8 @@ namespace AttackOfTheKarens {
         private char[][] map;
         private List<Store> stores;
         private bool[] feedAssigned = { false, false, false, false, false };
-        private Label[] feedLabels = new Label[5];
+        
+        public static Label[] feedLabels = new Label[5];
 
         //animations
         private PictureBox testPic;

@@ -81,6 +81,6 @@ namespace KarenLogic {
         /// Gets how much money the defeated Karen earned you.
         /// </summary>
         /// <returns></returns>
-        public float GetScore() { return score; }
+        public float GetScore() { return score * Game.PrestigeMoneyMultiplier; }
     }
 }

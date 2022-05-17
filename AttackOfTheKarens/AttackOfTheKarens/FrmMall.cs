@@ -25,14 +25,20 @@ namespace AttackOfTheKarens {
         private int yOwner;
         private char[][] map;
         private List<Store> stores;
-        private bool[] feedAssigned = { false, false, false, false, false };
-        private Label[] feedLabels = new Label[5];
+
+        //publics
+        public static bool[] feedAssigned = { false, false, false, false, false };
+        public static Label[] feedLabels = new Label[5];
 
         //animations
         private PictureBox testPic;
         private FrameAnimation testAni;
         private PictureBox? dollarSign;
         private MoveAnimation? dollarAni;
+        private PictureBox? fireworks;
+        private int fireworks_total_time = 3;
+        private static bool fireworksOn = false;
+        private static int fireworks_start_time;
 
         // ctor
         public FrmMall() {
@@ -50,13 +56,19 @@ namespace AttackOfTheKarens {
             }
         }
 
+        //create a picture box of size 64x64
         private PictureBox CreatePic(Image img, int top, int left) {
+            return CreatePic(img, top, left, CELL_SIZE, CELL_SIZE);
+        }
+
+        //create a picture box of any size
+        private PictureBox CreatePic(Image img, int top, int left, int w, int h) {
             return new PictureBox() {
                 Image = img,
                 Top = top,
                 Left = left,
-                Width = CELL_SIZE,
-                Height = CELL_SIZE,
+                Width = w,
+                Height = h,
             };
         }
 
@@ -92,12 +104,14 @@ namespace AttackOfTheKarens {
                 foreach (char c in array) {
                     switch (c) {
                         case 'K':
-                            pic = pic = CreatePic(Properties.Resources.karen0, top, left);
-                            Store s = new Store(new Karen(pic) {
+                            pic = CreatePic(Properties.Resources.karen0, top, left);
+                            PictureBox healthBar = CreatePic(Properties.Resources.health8, top+CELL_SIZE, left, CELL_SIZE, 8);
+                            Store s = new Store(new Karen(pic, healthBar) {
                             Row = top / CELL_SIZE,
                             Col = left / CELL_SIZE,
                             });
                             stores.Add(s);
+                            panMall.Controls.Add(healthBar);
                             break;
                         case 'o':
                             picOwner = CreatePic(Properties.Resources.owner, top, left);
@@ -127,22 +141,25 @@ namespace AttackOfTheKarens {
             }
 
             picOwner.BringToFront();
-            panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING;
+            panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING + 165;
             panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
             this.Width = panMall.Width + FORM_PADDING + 75;
             this.Height = panMall.Height + FORM_PADDING;
-            lblMoneySaved.Left = this.Width - 150;
-            lblMoneySavedLabel.Left = this.Width - 150;
-            lblMoneySavedLabel.Top = 0;
-            lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
+            this.Left = this.Left - 200;
+            lblPrestige.Left = this.Width - 300;
+            lblMoneySaved.Left = this.Width - 300;
+            lblMoneySavedLabel.Left = this.Width - 300;
+            lblPrestige.Top = this.Height - 100;
+            lblMoneySavedLabel.Top = 25;
+            lblMoneySaved.Top = lblMoneySavedLabel.Height + 30;
             feedLabels[0] = lblMoneyFeed1;
             feedLabels[1] = lblMoneyFeed2;
             feedLabels[2] = lblMoneyFeed3;
             feedLabels[3] = lblMoneyFeed4;
             feedLabels[4] = lblMoneyFeed5;
             for (int n=0; n<feedLabels.Length; n++) {
-                feedLabels[n].Left = this.Width - 150;
-                feedLabels[n].Top = lblMoneySavedLabel.Height + 40 + 30 * n;
+                feedLabels[n].Left = this.Width - 300;
+                feedLabels[n].Top = lblMoneySavedLabel.Height + 65 + 30 * n;
             }
         }
 
@@ -164,6 +181,19 @@ namespace AttackOfTheKarens {
         private bool IsWalkable(int newRow, int newCol) {
             char[] walkableTiles = new char[] { ' ', 'o', 'K', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'L' };
             return walkableTiles.Contains(map[newRow][newCol]);
+        }
+
+        public static void UpdateLabels() {
+            FrmMall.feedLabels[0].Text = "";
+            FrmMall.feedLabels[1].Text = "";
+            FrmMall.feedLabels[2].Text = "";
+            FrmMall.feedLabels[3].Text = "";
+            FrmMall.feedLabels[4].Text = "";
+            FrmMall.feedAssigned[0] = false;
+            FrmMall.feedAssigned[1] = false;
+            FrmMall.feedAssigned[2] = false;
+            FrmMall.feedAssigned[3] = false;
+            FrmMall.feedAssigned[4] = false;
         }
 
         private bool CanMove(Direction dir, out int newRow, out int newCol) {
@@ -270,14 +300,18 @@ namespace AttackOfTheKarens {
 
                     //if a karen was just defeated, begin dollar sign animation and set karen back to not defeated
                     //also, add money earned to money feed
-                    if (store.IsDefeated()) {
+                    if (store.IsDefeated())
+                    {
                         BeginDollarAnimation(store.GetTop(), store.GetLeft());
                         store.Reset();
 
-                        //if not all 3 feed text fields have been assigned yet, then assign one by one
-                        if (!feedAssigned[4]) {
-                            for (int n=0; n<feedAssigned.Length; n++) {
-                                if (!feedAssigned[n]) {
+                        //if not all 5 feed text fields have been assigned yet, then assign one by one
+                        if (!feedAssigned[4])
+                        {
+                            for (int n = 0; n < feedAssigned.Length; n++)
+                            {
+                                if (!feedAssigned[n])
+                                {
                                     feedAssigned[n] = true;
                                     feedLabels[n].Text = store.GetScore().ToString("+ $ #,##0.00");
                                     break;
@@ -285,11 +319,48 @@ namespace AttackOfTheKarens {
                             }
                         }
 
-                        //if all 3 fields have been assigned, "scroll" the feed
-                        else {
-                            for (int n=0; n<feedAssigned.Length-1; n++) { feedLabels[n].Text = feedLabels[n+1].Text; }
+                        //if all 5 fields have been assigned, "scroll" the feed
+                        else
+                        {
+                            for (int n = 0; n < feedAssigned.Length - 1; n++) { feedLabels[n].Text = feedLabels[n + 1].Text; }
                             feedLabels[4].Text = store.GetScore().ToString("+ $ #,##0.00");
                         }
+                    }
+
+                    //if a karen hasnt been defeated yet, manage health bar
+                    else {
+                        int healthBars = store.getHealthBars();
+                        PictureBox healthBarPB = store.GetHealthPB();
+                        switch (healthBars) {
+                            case 8:
+                                healthBarPB.Image = Properties.Resources.health8;
+                                break;
+                            case 7:
+                                healthBarPB.Image = Properties.Resources.health8;
+                                break;
+                            case 6:
+                                healthBarPB.Image = Properties.Resources.health7;
+                                break;
+                            case 5:
+                                healthBarPB.Image = Properties.Resources.health6;
+                                break;
+                            case 4:
+                                healthBarPB.Image = Properties.Resources.health5;
+                                break;
+                            case 3:
+                                healthBarPB.Image = Properties.Resources.health4;
+                                break;
+                            case 2:
+                                healthBarPB.Image = Properties.Resources.health3;
+                                break;
+                            case 1:
+                                healthBarPB.Image = Properties.Resources.health2;
+                                break;
+                            case 0:
+                                healthBarPB.Image = Properties.Resources.health1;
+                                break;
+                        }
+                        healthBarPB.BringToFront();
                     }
                 }
             }
@@ -300,9 +371,17 @@ namespace AttackOfTheKarens {
             Move(dir);
         }
 
-        private void tmrUpdateGame_Tick(object sender, EventArgs e) { lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00"); }
+        private void tmrUpdateGame_Tick(object sender, EventArgs e) {
+            lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
+            lblPrestige.Text = "Prestige: " + Game.PrestigeLevel;
+        }
 
         private void panMall_Paint(object sender, PaintEventArgs e) { }
+
+        public static void TurnOnFireworks() {
+            fireworksOn = true;
+            fireworks_start_time = DateTime.Now.Second;
+        }
 
         /// <summary>
         /// Update animations every 100ms.
@@ -331,6 +410,19 @@ namespace AttackOfTheKarens {
                 //if animation is done then set the dollar sign back to not visible
                 if (dollarAni.isDone()) { dollarSign.Visible = false; }
             }
+
+            //fireworks animation
+            if (fireworksOn) {
+                if (fireworks == null) {
+                    fireworks = CreatePic(Properties.Resources.fireworks, 300, this.Width-300, 165, 165);
+                    panMall.Controls.Add(fireworks);
+                }
+                if (DateTime.Now.Second - fireworks_start_time > fireworks_total_time) {
+                    panMall.Controls.Remove(fireworks);
+                    fireworks = null;
+                    fireworksOn = false;
+                }
+            }
         }
 
         private void PrestigeMenuButton_Click(object sender, EventArgs e)
@@ -356,6 +448,17 @@ namespace AttackOfTheKarens {
                 player?.Play();
                 i--;
             }
+        }
+
+        private void ShopButton_Click(object sender, EventArgs e)
+        {
+            ItemsShop popup = new ItemsShop();
+            DialogResult dialogresult = popup.ShowDialog();
+            if (dialogresult == DialogResult.Cancel)
+            {
+                Console.WriteLine("You clicked either Cancel or X button in the top right corner");
+            }
+            popup.Dispose();
         }
         /*private void WhipButton(object sender, EventArgs e)
         {

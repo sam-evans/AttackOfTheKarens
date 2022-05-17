@@ -1,5 +1,6 @@
 ﻿using KarenLogic;
 using System;
+using static AttackOfTheKarens.FrmMall;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace AttackOfTheKarens
 {
     public partial class PrestigeMenu : Form
     {
+        public static bool lablesReset;
         public PrestigeMenu()
         {
             InitializeComponent();
@@ -82,8 +84,16 @@ namespace AttackOfTheKarens
         private void ResetAfterPrestige()
         {
             Game.PrestigeMenuCondition *= 10;
+            Game.PrestigeLevel++;
             Game.Score = 0;
+
+            FrmMall.UpdateLabels();
+            FrmMall.TurnOnFireworks();
         }
 
+        private void PrestigeNotEnoughMoneyText_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

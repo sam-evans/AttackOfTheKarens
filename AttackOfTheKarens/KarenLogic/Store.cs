@@ -9,51 +9,33 @@ namespace KarenLogic {
             this.karen = karen;
         }
 
-        /// <summary>
-        /// Returns true if the Karen is in the defeated state.
-        /// </summary>
-        /// <returns></returns>
-        public bool IsDefeated() { return this.karen.IsDefeated; }
-        /// <summary>
-        /// Return the Y position of the Karen.
-        /// </summary>
-        /// <returns></returns>
+        //position of the karen
         public int GetTop() { return this.karen.GetTop(); }
-        /// <summary>
-        /// Return the X position of the Karen.
-        /// </summary>
-        /// <returns></returns>
         public int GetLeft() { return this.karen.GetLeft(); }
-        /// <summary>
-        /// Reset the Karen back to not defeated.
-        /// </summary>
+
+        //whether or not a karen was just defeated
+        public bool IsDefeated() { return this.karen.IsDefeated; }
+
+        //reset the karen back to not defeated
         public void Reset() { this.karen.Reset(); }
-        /// <summary>
-        /// Gets how much money the defeated Karen earned you.
-        /// </summary>
+
+        //getters
         public float GetScore() { return this.karen.Score; }
-        /// <summary>
-        /// Get the level of the Karen that just spawned.
-        /// </summary>
         public int GetLevel() { return this.karen.Level; }
-        /// <summary>
-        /// Get the PictureBox of the Karen.
-        /// </summary>
-        /// <returns></returns>
         public PictureBox GetKarenPB() { return this.karen.pic; }
+        public PictureBox GetHealthPB() { return this.karen.health; }
 
-        public void ActivateTheKaren() {
-            karen.Appear();
-        }
+        //determine what image the health bar should be
+        public int getHealthBars() { return this.karen.Health * 8 / this.karen.maxHealth; }
 
-        public void OwnerWalksIn() {
-            containsOwner = true;
-        }
+        //spawn a karen
+        public void ActivateTheKaren() { karen.Appear(); }
 
-        public void ResetOwner() {
-            containsOwner = false;
-        }
+        //change whether owner is inside or outside of store
+        public void OwnerWalksIn() { containsOwner = true; }
+        public void ResetOwner() { containsOwner = false; }
 
+        //update karen hp
         public void Update() {
             if (karen.IsPresent && containsOwner) {
                 karen.Damage(1);

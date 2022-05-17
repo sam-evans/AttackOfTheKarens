@@ -41,6 +41,7 @@ namespace AttackOfTheKarens {
             this.tmrUpdateGame = new System.Windows.Forms.Timer(this.components);
             this.PrestigeMenuButton = new System.Windows.Forms.Button();
             this.MuteButton = new System.Windows.Forms.Button();
+            //this.Wipe = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // panMall
@@ -185,10 +186,22 @@ namespace AttackOfTheKarens {
             this.MuteButton.Text = "Mute";
             this.MuteButton.UseVisualStyleBackColor = true;
             this.MuteButton.Click += new System.EventHandler(this.MuteButton_Click);
-            this.MuteButton.Visible = true;
+            //this.MuteButton.Visible = true;
+            
 
 
-
+            //
+            //whip board
+            //
+            /*this.Whip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Wipe.Location = new System.Drawing.Point(1000, 620);
+            this.Wipe.Name = "WipeButton";
+            this.Wipe.Size = new System.Drawing.Size(75, 23);
+            this.Wipe.TabIndex = 3;
+            this.Wipe.Text = "Wipe";
+            this.Wipe.UseVisualStyleBackColor = true;
+            this.Wipe.Click += new System.EventHandler(this.WhipButton);
+            //this.Wipe.Visible = true;*/
 
 
             // 
@@ -199,6 +212,7 @@ namespace AttackOfTheKarens {
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1171, 698);
+            //this.Controls.Add(this.Wipe);
             this.Controls.Add(this.MuteButton);
             this.Controls.Add(this.PrestigeMenuButton);
             this.Controls.Add(this.lblMoneySavedLabel);
@@ -242,6 +256,7 @@ namespace AttackOfTheKarens {
     private System.Windows.Forms.Button PrestigeMenuButton;
         private Button MuteButton;
         private System.Windows.Forms.Button Mute;
+        //private System.Windows.Forms.Button Whip;
     }
 
     /// <summary>

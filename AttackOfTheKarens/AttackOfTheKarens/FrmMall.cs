@@ -357,5 +357,16 @@ namespace AttackOfTheKarens {
                 i--;
             }
         }
+        /*private void WhipButton(object sender, EventArgs e)
+        {
+            foreach(Store store in stores)
+            {
+                //store.Update();
+                store.IsDefeated();
+                BeginDollarAnimation(store.GetTop(), store.GetLeft());
+                //store.Reset();
+            }
+            
+        }*/
     }
 }

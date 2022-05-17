@@ -26,7 +26,7 @@ namespace AttackOfTheKarens {
         private int xOwner;
         private int yOwner;
         private char[][] map;
-        private List<Store> stores;
+        public static List<Store> stores;
 
         //publics
         public static bool[] feedAssigned = { false, false, false, false, false };
@@ -462,15 +462,18 @@ namespace AttackOfTheKarens {
             }
             popup.Dispose();
         }
-        //public static void WipeButton()
-        //{
-          //  foreach(Store store in stores)
-            //{
-                
-              //  store.IsDefeated();
-                //BeginDollarAnimation(store.GetTop(), store.GetLeft());
-            //}
+
+      
+
+        public static void WipeButton()
+        {
+           
             
-        //}
+            for (int p = 0; p < stores.Count(); p++)
+            {
+                stores[p].Wipe();
+            }
+            
+        }
     }
 }

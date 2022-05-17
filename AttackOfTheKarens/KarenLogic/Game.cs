@@ -18,6 +18,7 @@ namespace KarenLogic {
         }
 
         public static void AddToScore(float amount) { Score += amount; }
+        
 
         public static void CloseAll() { for (int i = 0; i < openForms.Count; i++) { openForms[i].Close(); } }
     }

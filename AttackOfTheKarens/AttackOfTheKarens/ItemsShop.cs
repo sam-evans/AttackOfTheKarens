@@ -17,12 +17,19 @@ namespace AttackOfTheKarens
             InitializeComponent();
         }
 
-
+        float WipeCost = 15f;
         private void KarenBoardWipeButton_Click(object sender, EventArgs e)
         {
             //TODO: Wipe board of karens on button click if player has enough money.
             //Optional: Show the "not enough money" if player doesn't have enough. Also Could be time limited
-           // FrmMall.WipeButton();
+            if (KarenLogic.Game.Score > WipeCost) {
+                FrmMall.WipeButton();
+                
+                KarenLogic.Game.Score -= WipeCost;
+                WipeCost += 15f;
+            }
+               
+            
         }
 
         private void OwnerSpeedIncreaseButton_Click(object sender, EventArgs e)

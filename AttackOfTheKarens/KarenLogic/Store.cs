@@ -41,5 +41,12 @@ namespace KarenLogic {
                 karen.Damage(1);
             }
         }
+        public void Wipe()
+        {
+            if (karen.IsPresent)
+            {
+                karen.Damage(1000000);
+            }
+        }
     }
 }

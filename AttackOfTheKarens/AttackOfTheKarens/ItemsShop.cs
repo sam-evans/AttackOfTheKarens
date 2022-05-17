@@ -22,6 +22,7 @@ namespace AttackOfTheKarens
         {
             //TODO: Wipe board of karens on button click if player has enough money.
             //Optional: Show the "not enough money" if player doesn't have enough. Also Could be time limited
+           // FrmMall.WipeButton();
         }
 
         private void OwnerSpeedIncreaseButton_Click(object sender, EventArgs e)

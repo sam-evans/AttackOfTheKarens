@@ -1,6 +1,6 @@
 ﻿namespace AttackOfTheKarens
 {
-    partial class ItemsShop
+    partial class ItemsShop 
     {
         /// <summary>
         /// Required designer variable.

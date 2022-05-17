@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Drawing;
 
 namespace KarenLogic {
 
@@ -6,31 +7,19 @@ namespace KarenLogic {
     /// TODO: write a comment here
     /// </summary>
     public class Karen {
-
-        /// <summary>
-        /// The pixel location of the row Karen is on
-        /// </summary>
         public int Row { get; set; }
         public int Col { get; set; }
         public int Health { get; private set; }
         public bool IsPresent { get; private set; }
-
-        public float score = 0;
-
-        /// <summary>
-        /// If a Karen has just been defeated, this will return true until the dollar animation has begun.
-        /// </summary>
         public bool IsDefeated { get; private set; }
+        public int Level { get; private set; }
+        public float Score { get; private set; }
 
-        /// <summary>
-        /// This is the image of Karen
-        /// </summary>
+        public int GetTop() { return pic.Top; }
+        public int GetLeft() { return pic.Left; }
+        public void Reset() { this.IsDefeated = false; }
+
         public PictureBox pic;
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="pic">The PictureBox container for Karen</param>
         public Karen(PictureBox pic) {
             this.pic = pic;
             this.pic.Visible = false;
@@ -40,9 +29,17 @@ namespace KarenLogic {
         }
 
         public void Appear() {
+            if (this.IsPresent) { return; }
+
             this.pic.Visible = true;
             this.IsPresent = true;
             this.pic.BringToFront();
+
+            //set a random level from 0 to 3
+            System.Random random = new System.Random();
+            this.Level = random.Next(0, 4);
+
+            this.Health = 20 + 20 * Level;
         }
 
         public void Damage(int amount) {
@@ -53,34 +50,17 @@ namespace KarenLogic {
                 System.Random random = new System.Random();
                 float randF = (float)random.NextDouble();
                 int randI = random.Next(4, 7);
+
+                //score is multiplied based off of karen level
                 float score = randI+randF;
+                score = score + score * Level;
 
                 Game.AddToScore(score);
-                this.score = score;
+                this.Score = score;
                 this.pic.Visible = false;
                 this.IsPresent = false;
                 this.IsDefeated = true;
             }
         }
-
-        /// <summary>
-        /// Get the Y position of the Karen.
-        /// </summary>
-        /// <returns></returns>
-        public int GetTop() { return pic.Top; }
-        /// <summary>
-        /// Get the X position of the Karen.
-        /// </summary>
-        /// <returns></returns>
-        public int GetLeft() { return pic.Left; }
-        /// <summary>
-        /// Set the Karen back to not defeated.
-        /// </summary>
-        public void Reset() { this.IsDefeated = false; }
-        /// <summary>
-        /// Gets how much money the defeated Karen earned you.
-        /// </summary>
-        /// <returns></returns>
-        public float GetScore() { return score * Game.PrestigeMoneyMultiplier; }
     }
 }

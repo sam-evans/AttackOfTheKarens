@@ -1,4 +1,6 @@
-﻿namespace KarenLogic {
+﻿using System.Windows.Forms;
+
+namespace KarenLogic {
     public class Store {
         private Karen karen;
         private bool containsOwner;
@@ -29,7 +31,16 @@
         /// <summary>
         /// Gets how much money the defeated Karen earned you.
         /// </summary>
-        public float GetScore() { return this.karen.GetScore(); }
+        public float GetScore() { return this.karen.Score; }
+        /// <summary>
+        /// Get the level of the Karen that just spawned.
+        /// </summary>
+        public int GetLevel() { return this.karen.Level; }
+        /// <summary>
+        /// Get the PictureBox of the Karen.
+        /// </summary>
+        /// <returns></returns>
+        public PictureBox GetKarenPB() { return this.karen.pic; }
 
         public void ActivateTheKaren() {
             karen.Appear();

@@ -84,15 +84,10 @@ namespace AttackOfTheKarens
         private void ResetAfterPrestige()
         {
             Game.PrestigeMenuCondition *= 10;
+            Game.PrestigeLevel++;
             Game.Score = 0;
 
-            FrmMall.feedLabels[0].Text = "";
-            FrmMall.feedLabels[1].Text = "";
-            FrmMall.feedLabels[2].Text = "";
-            FrmMall.feedLabels[3].Text = "";
-            FrmMall.feedLabels[4].Text = "";
-
+            FrmMall.UpdateLabels();
         }
-
     }
 }

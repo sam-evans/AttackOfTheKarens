@@ -26,11 +26,12 @@ namespace AttackOfTheKarens {
     /// </summary>
     private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.panMall = new AttackOfTheKarens.DBPanel();
+            this.panMall = new DBPanel();
             this.tmrAnimationsUpdate = new System.Windows.Forms.Timer(this.components);
             this.tmrKarenSpawner = new System.Windows.Forms.Timer(this.components);
             this.tmrUpdateKarens = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveOwner = new System.Windows.Forms.Timer(this.components);
+            this.lblPrestige = new System.Windows.Forms.Label();
             this.lblMoneySaved = new System.Windows.Forms.Label();
             this.lblMoneySavedLabel = new System.Windows.Forms.Label();
             this.lblMoneyFeed1 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@ namespace AttackOfTheKarens {
             this.PrestigeMenuButton = new System.Windows.Forms.Button();
             this.MuteButton = new System.Windows.Forms.Button();
             this.ItemsShopButton = new System.Windows.Forms.Button();
-            this.dbPanel1 = new AttackOfTheKarens.DBPanel();
             this.SuspendLayout();
             // 
             // panMall
@@ -99,6 +99,18 @@ namespace AttackOfTheKarens {
             this.lblMoneySavedLabel.TabIndex = 2;
             this.lblMoneySavedLabel.Text = "Money Saved:";
             this.lblMoneySavedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblPrestige
+            //
+            this.lblPrestige.AutoSize = true;
+            this.lblPrestige.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblPrestige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
+            this.lblPrestige.Location = new System.Drawing.Point(917, 6);
+            this.lblPrestige.Name = "lblPrestige";
+            this.lblPrestige.Size = new System.Drawing.Size(137, 25);
+            this.lblPrestige.TabIndex = 2;
+            this.lblPrestige.Text = "Prestige: 0";
+            this.lblPrestige.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblMoneyFeed1
             // 
@@ -193,13 +205,6 @@ namespace AttackOfTheKarens {
             this.ItemsShopButton.UseVisualStyleBackColor = true;
             this.ItemsShopButton.Click += new System.EventHandler(this.ShopButton_Click);
             // 
-            // dbPanel1
-            // 
-            this.dbPanel1.Location = new System.Drawing.Point(809, 418);
-            this.dbPanel1.Name = "dbPanel1";
-            this.dbPanel1.Size = new System.Drawing.Size(200, 100);
-            this.dbPanel1.TabIndex = 5;
-            // 
             // FrmMall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -207,10 +212,10 @@ namespace AttackOfTheKarens {
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1171, 698);
-            this.Controls.Add(this.dbPanel1);
             this.Controls.Add(this.ItemsShopButton);
             this.Controls.Add(this.MuteButton);
             this.Controls.Add(this.PrestigeMenuButton);
+            this.Controls.Add(this.lblPrestige);
             this.Controls.Add(this.lblMoneySavedLabel);
             this.Controls.Add(this.lblMoneySaved);
             this.Controls.Add(this.lblMoneyFeed1);
@@ -236,6 +241,7 @@ namespace AttackOfTheKarens {
     private System.Windows.Forms.Timer tmrKarenSpawner;
     private System.Windows.Forms.Timer tmrUpdateKarens;
     private System.Windows.Forms.Timer tmrMoveOwner;
+    private System.Windows.Forms.Label lblPrestige;
     private System.Windows.Forms.Label lblMoneySaved;
     private System.Windows.Forms.Label lblMoneySavedLabel;
     private System.Windows.Forms.Label lblMoneyFeed1;
@@ -253,7 +259,6 @@ namespace AttackOfTheKarens {
         private Button MuteButton;
         private System.Windows.Forms.Button Mute;
         private Button ItemsShopButton;
-        private DBPanel dbPanel1;
     }
 
     /// <summary>

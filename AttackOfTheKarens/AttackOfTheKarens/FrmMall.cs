@@ -25,8 +25,9 @@ namespace AttackOfTheKarens {
         private int yOwner;
         private char[][] map;
         private List<Store> stores;
-        private bool[] feedAssigned = { false, false, false, false, false };
-        
+
+        //publics
+        public static bool[] feedAssigned = { false, false, false, false, false };
         public static Label[] feedLabels = new Label[5];
 
         //animations
@@ -132,8 +133,10 @@ namespace AttackOfTheKarens {
             panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
             this.Width = panMall.Width + FORM_PADDING + 75;
             this.Height = panMall.Height + FORM_PADDING;
+            lblPrestige.Left = this.Width - 150;
             lblMoneySaved.Left = this.Width - 150;
             lblMoneySavedLabel.Left = this.Width - 150;
+            lblPrestige.Top = 300;
             lblMoneySavedLabel.Top = 0;
             lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
             feedLabels[0] = lblMoneyFeed1;
@@ -165,6 +168,19 @@ namespace AttackOfTheKarens {
         private bool IsWalkable(int newRow, int newCol) {
             char[] walkableTiles = new char[] { ' ', 'o', 'K', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'L' };
             return walkableTiles.Contains(map[newRow][newCol]);
+        }
+
+        public static void UpdateLabels() {
+            FrmMall.feedLabels[0].Text = "";
+            FrmMall.feedLabels[1].Text = "";
+            FrmMall.feedLabels[2].Text = "";
+            FrmMall.feedLabels[3].Text = "";
+            FrmMall.feedLabels[4].Text = "";
+            FrmMall.feedAssigned[0] = false;
+            FrmMall.feedAssigned[1] = false;
+            FrmMall.feedAssigned[2] = false;
+            FrmMall.feedAssigned[3] = false;
+            FrmMall.feedAssigned[4] = false;
         }
 
         private bool CanMove(Direction dir, out int newRow, out int newCol) {
@@ -275,7 +291,7 @@ namespace AttackOfTheKarens {
                         BeginDollarAnimation(store.GetTop(), store.GetLeft());
                         store.Reset();
 
-                        //if not all 3 feed text fields have been assigned yet, then assign one by one
+                        //if not all 5 feed text fields have been assigned yet, then assign one by one
                         if (!feedAssigned[4]) {
                             for (int n=0; n<feedAssigned.Length; n++) {
                                 if (!feedAssigned[n]) {
@@ -286,7 +302,7 @@ namespace AttackOfTheKarens {
                             }
                         }
 
-                        //if all 3 fields have been assigned, "scroll" the feed
+                        //if all 5 fields have been assigned, "scroll" the feed
                         else {
                             for (int n=0; n<feedAssigned.Length-1; n++) { feedLabels[n].Text = feedLabels[n+1].Text; }
                             feedLabels[4].Text = store.GetScore().ToString("+ $ #,##0.00");
@@ -301,7 +317,10 @@ namespace AttackOfTheKarens {
             Move(dir);
         }
 
-        private void tmrUpdateGame_Tick(object sender, EventArgs e) { lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00"); }
+        private void tmrUpdateGame_Tick(object sender, EventArgs e) {
+            lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
+            lblPrestige.Text = "Prestige: " + Game.PrestigeLevel;
+        }
 
         private void panMall_Paint(object sender, PaintEventArgs e) { }
 

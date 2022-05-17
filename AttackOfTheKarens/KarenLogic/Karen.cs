@@ -41,10 +41,20 @@ namespace KarenLogic {
             this.IsPresent = true;
             this.pic.BringToFront();
 
-            //set a random level from 0 to 3
+            //create a random number from 1 to 100 to determine level of karen
             System.Random random = new System.Random();
-            this.Level = random.Next(0, 4);
+            int RNG = random.Next(1, 101);
 
+            //RNG number is increased based off of prestige level
+            RNG += Game.PrestigeLevel * 50;
+
+            //determine level of karen
+            if (RNG <= 75) { this.Level = 0; }
+            else if (RNG <= 125) { this.Level = 1; }
+            else if (RNG <= 175) { this.Level = 2; }
+            else { this.Level = 3; }
+
+            //health is based off of karen level
             this.Health = 20 + 20 * Level;
             this.maxHealth = this.Health;
         }
@@ -59,7 +69,7 @@ namespace KarenLogic {
                 int randI = random.Next(4, 7);
                 float score = randI + randF;
 
-                //score is multiplied based off of karen level and prestige level
+                //score is multiplied based off of karen level and prestige multiplier
                 score = score + score * Level;
                 score *= Game.PrestigeMoneyMultiplier;
 

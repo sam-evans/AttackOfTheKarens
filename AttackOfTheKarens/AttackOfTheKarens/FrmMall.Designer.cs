@@ -26,7 +26,7 @@ namespace AttackOfTheKarens {
     /// </summary>
     private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            this.panMall = new DBPanel();
+            this.panMall = new AttackOfTheKarens.DBPanel();
             this.tmrAnimationsUpdate = new System.Windows.Forms.Timer(this.components);
             this.tmrKarenSpawner = new System.Windows.Forms.Timer(this.components);
             this.tmrUpdateKarens = new System.Windows.Forms.Timer(this.components);
@@ -41,10 +41,12 @@ namespace AttackOfTheKarens {
             this.tmrUpdateGame = new System.Windows.Forms.Timer(this.components);
             this.PrestigeMenuButton = new System.Windows.Forms.Button();
             this.MuteButton = new System.Windows.Forms.Button();
+            this.ItemsShopButton = new System.Windows.Forms.Button();
+            this.dbPanel1 = new AttackOfTheKarens.DBPanel();
             this.SuspendLayout();
             // 
             // panMall
-            //
+            // 
             this.panMall.BackColor = System.Drawing.Color.Transparent;
             this.panMall.BackgroundImage = global::AttackOfTheKarens.Properties.Resources.mall_bg;
             this.panMall.Location = new System.Drawing.Point(12, 12);
@@ -81,7 +83,7 @@ namespace AttackOfTheKarens {
             this.lblMoneySaved.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.lblMoneySaved.Location = new System.Drawing.Point(1075, -1);
             this.lblMoneySaved.Name = "lblMoneySaved";
-            this.lblMoneySaved.Size = new System.Drawing.Size(98, 32);
+            this.lblMoneySaved.Size = new System.Drawing.Size(84, 32);
             this.lblMoneySaved.TabIndex = 1;
             this.lblMoneySaved.Text = "$ 0.00";
             this.lblMoneySaved.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -97,65 +99,60 @@ namespace AttackOfTheKarens {
             this.lblMoneySavedLabel.TabIndex = 2;
             this.lblMoneySavedLabel.Text = "Money Saved:";
             this.lblMoneySavedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            //
+            // 
             // lblMoneyFeed1
-            //
+            // 
             this.lblMoneyFeed1.AutoSize = true;
             this.lblMoneyFeed1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMoneyFeed1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.lblMoneyFeed1.Location = new System.Drawing.Point(1075, -1);
             this.lblMoneyFeed1.Name = "lblMoneyFeed1";
-            this.lblMoneyFeed1.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed1.Size = new System.Drawing.Size(0, 32);
             this.lblMoneyFeed1.TabIndex = 1;
-            this.lblMoneyFeed1.Text = "";
             this.lblMoneyFeed1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            //
+            // 
             // lblMoneyFeed2
-            //
+            // 
             this.lblMoneyFeed2.AutoSize = true;
             this.lblMoneyFeed2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMoneyFeed2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.lblMoneyFeed2.Location = new System.Drawing.Point(1075, -1);
             this.lblMoneyFeed2.Name = "lblMoneyFeed2";
-            this.lblMoneyFeed2.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed2.Size = new System.Drawing.Size(0, 32);
             this.lblMoneyFeed2.TabIndex = 1;
-            this.lblMoneyFeed2.Text = "";
             this.lblMoneyFeed2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            //
+            // 
             // lblMoneyFeed3
-            //
+            // 
             this.lblMoneyFeed3.AutoSize = true;
             this.lblMoneyFeed3.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMoneyFeed3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.lblMoneyFeed3.Location = new System.Drawing.Point(1075, -1);
             this.lblMoneyFeed3.Name = "lblMoneyFeed3";
-            this.lblMoneyFeed3.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed3.Size = new System.Drawing.Size(0, 32);
             this.lblMoneyFeed3.TabIndex = 1;
-            this.lblMoneyFeed3.Text = "";
             this.lblMoneyFeed3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            //
+            // 
             // lblMoneyFeed4
-            //
+            // 
             this.lblMoneyFeed4.AutoSize = true;
             this.lblMoneyFeed4.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMoneyFeed4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.lblMoneyFeed4.Location = new System.Drawing.Point(1075, -1);
             this.lblMoneyFeed4.Name = "lblMoneyFeed4";
-            this.lblMoneyFeed4.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed4.Size = new System.Drawing.Size(0, 32);
             this.lblMoneyFeed4.TabIndex = 1;
-            this.lblMoneyFeed4.Text = "";
             this.lblMoneyFeed4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            //
+            // 
             // lblMoneyFeed5
-            //
+            // 
             this.lblMoneyFeed5.AutoSize = true;
             this.lblMoneyFeed5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblMoneyFeed5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
             this.lblMoneyFeed5.Location = new System.Drawing.Point(1075, -1);
             this.lblMoneyFeed5.Name = "lblMoneyFeed5";
-            this.lblMoneyFeed5.Size = new System.Drawing.Size(137, 25);
+            this.lblMoneyFeed5.Size = new System.Drawing.Size(0, 32);
             this.lblMoneyFeed5.TabIndex = 1;
-            this.lblMoneyFeed5.Text = "";
             this.lblMoneyFeed5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tmrUpdateGame
@@ -173,10 +170,9 @@ namespace AttackOfTheKarens {
             this.PrestigeMenuButton.Text = "Prestige";
             this.PrestigeMenuButton.UseVisualStyleBackColor = true;
             this.PrestigeMenuButton.Click += new System.EventHandler(this.PrestigeMenuButton_Click);
-
             // 
-            // MuteButton 
-            //
+            // MuteButton
+            // 
             this.MuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.MuteButton.Location = new System.Drawing.Point(1084, 650);
             this.MuteButton.Name = "MuteButton";
@@ -185,12 +181,24 @@ namespace AttackOfTheKarens {
             this.MuteButton.Text = "Mute";
             this.MuteButton.UseVisualStyleBackColor = true;
             this.MuteButton.Click += new System.EventHandler(this.MuteButton_Click);
-            this.MuteButton.Visible = true;
-
-
-
-
-
+            // 
+            // ItemsShopButton
+            // 
+            this.ItemsShopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ItemsShopButton.Location = new System.Drawing.Point(1084, 369);
+            this.ItemsShopButton.Name = "ItemsShopButton";
+            this.ItemsShopButton.Size = new System.Drawing.Size(75, 23);
+            this.ItemsShopButton.TabIndex = 4;
+            this.ItemsShopButton.Text = "Shop";
+            this.ItemsShopButton.UseVisualStyleBackColor = true;
+            this.ItemsShopButton.Click += new System.EventHandler(this.ShopButton_Click);
+            // 
+            // dbPanel1
+            // 
+            this.dbPanel1.Location = new System.Drawing.Point(809, 418);
+            this.dbPanel1.Name = "dbPanel1";
+            this.dbPanel1.Size = new System.Drawing.Size(200, 100);
+            this.dbPanel1.TabIndex = 5;
             // 
             // FrmMall
             // 
@@ -199,6 +207,8 @@ namespace AttackOfTheKarens {
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1171, 698);
+            this.Controls.Add(this.dbPanel1);
+            this.Controls.Add(this.ItemsShopButton);
             this.Controls.Add(this.MuteButton);
             this.Controls.Add(this.PrestigeMenuButton);
             this.Controls.Add(this.lblMoneySavedLabel);
@@ -242,6 +252,8 @@ namespace AttackOfTheKarens {
     private System.Windows.Forms.Button PrestigeMenuButton;
         private Button MuteButton;
         private System.Windows.Forms.Button Mute;
+        private Button ItemsShopButton;
+        private DBPanel dbPanel1;
     }
 
     /// <summary>

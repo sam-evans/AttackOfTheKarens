@@ -348,5 +348,16 @@ namespace AttackOfTheKarens {
                 i--;
             }
         }
+
+        private void ShopButton_Click(object sender, EventArgs e)
+        {
+            ItemsShop popup = new ItemsShop();
+            DialogResult dialogresult = popup.ShowDialog();
+            if (dialogresult == DialogResult.Cancel)
+            {
+                Console.WriteLine("You clicked either Cancel or X button in the top right corner");
+            }
+            popup.Dispose();
+        }
     }
 }

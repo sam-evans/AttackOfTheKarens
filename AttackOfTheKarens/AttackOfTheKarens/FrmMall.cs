@@ -15,7 +15,9 @@ namespace AttackOfTheKarens {
         private const int FORM_PADDING = 60;
         private const int CELL_SIZE = 64;
         private readonly Random rand = new Random();
-        private readonly Color[] colors = new Color[5] { Color.Red, Color.Green, Color.Blue, Color.Orange, Color.Yellow };
+        //private readonly Color[] colors = new Color[5] { Color.Red, Color.Green, Color.Blue, Color.Orange, Color.Yellow };
+
+        private readonly Color colors = Color.Gray;
 
         // other privates
         private SoundPlayer player;
@@ -166,7 +168,7 @@ namespace AttackOfTheKarens {
         private void FrmMall_Load(object sender, EventArgs e) {
             stores = new List<Store>();
             LoadMap();
-            GenerateMall(colors[rand.Next(colors.Length)]);
+            GenerateMall(colors);
             tmrKarenSpawner.Interval = rand.Next(1000, 5000);
             tmrKarenSpawner.Enabled = true;
             player = new SoundPlayer();

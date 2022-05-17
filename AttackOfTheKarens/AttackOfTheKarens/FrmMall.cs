@@ -35,6 +35,10 @@ namespace AttackOfTheKarens {
         private FrameAnimation testAni;
         private PictureBox? dollarSign;
         private MoveAnimation? dollarAni;
+        private PictureBox? fireworks;
+        private int fireworks_total_time = 3;
+        private static bool fireworksOn = false;
+        private static int fireworks_start_time;
 
         // ctor
         public FrmMall() {
@@ -137,24 +141,25 @@ namespace AttackOfTheKarens {
             }
 
             picOwner.BringToFront();
-            panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING;
+            panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING + 165;
             panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
             this.Width = panMall.Width + FORM_PADDING + 75;
             this.Height = panMall.Height + FORM_PADDING;
-            lblPrestige.Left = this.Width - 150;
-            lblMoneySaved.Left = this.Width - 150;
-            lblMoneySavedLabel.Left = this.Width - 150;
-            lblPrestige.Top = 250;
-            lblMoneySavedLabel.Top = 0;
-            lblMoneySaved.Top = lblMoneySavedLabel.Height + 5;
+            this.Left = this.Left - 200;
+            lblPrestige.Left = this.Width - 300;
+            lblMoneySaved.Left = this.Width - 300;
+            lblMoneySavedLabel.Left = this.Width - 300;
+            lblPrestige.Top = this.Height - 100;
+            lblMoneySavedLabel.Top = 25;
+            lblMoneySaved.Top = lblMoneySavedLabel.Height + 30;
             feedLabels[0] = lblMoneyFeed1;
             feedLabels[1] = lblMoneyFeed2;
             feedLabels[2] = lblMoneyFeed3;
             feedLabels[3] = lblMoneyFeed4;
             feedLabels[4] = lblMoneyFeed5;
             for (int n=0; n<feedLabels.Length; n++) {
-                feedLabels[n].Left = this.Width - 150;
-                feedLabels[n].Top = lblMoneySavedLabel.Height + 40 + 30 * n;
+                feedLabels[n].Left = this.Width - 300;
+                feedLabels[n].Top = lblMoneySavedLabel.Height + 65 + 30 * n;
             }
         }
 
@@ -373,6 +378,11 @@ namespace AttackOfTheKarens {
 
         private void panMall_Paint(object sender, PaintEventArgs e) { }
 
+        public static void TurnOnFireworks() {
+            fireworksOn = true;
+            fireworks_start_time = DateTime.Now.Second;
+        }
+
         /// <summary>
         /// Update animations every 100ms.
         /// </summary>
@@ -399,6 +409,19 @@ namespace AttackOfTheKarens {
 
                 //if animation is done then set the dollar sign back to not visible
                 if (dollarAni.isDone()) { dollarSign.Visible = false; }
+            }
+
+            //fireworks animation
+            if (fireworksOn) {
+                if (fireworks == null) {
+                    fireworks = CreatePic(Properties.Resources.fireworks, 300, this.Width-300, 165, 165);
+                    panMall.Controls.Add(fireworks);
+                }
+                if (DateTime.Now.Second - fireworks_start_time > fireworks_total_time) {
+                    panMall.Controls.Remove(fireworks);
+                    fireworks = null;
+                    fireworksOn = false;
+                }
             }
         }
 

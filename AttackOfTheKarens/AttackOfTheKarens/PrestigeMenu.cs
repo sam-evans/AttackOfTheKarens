@@ -88,6 +88,12 @@ namespace AttackOfTheKarens
             Game.Score = 0;
 
             FrmMall.UpdateLabels();
+            FrmMall.TurnOnFireworks();
+        }
+
+        private void PrestigeNotEnoughMoneyText_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

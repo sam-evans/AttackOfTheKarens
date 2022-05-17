@@ -175,7 +175,7 @@ namespace AttackOfTheKarens {
             // PrestigeMenuButton
             // 
             this.PrestigeMenuButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.PrestigeMenuButton.Location = new System.Drawing.Point(1084, 425);
+            this.PrestigeMenuButton.Location = new System.Drawing.Point(1084, 600);
             this.PrestigeMenuButton.Name = "PrestigeMenuButton";
             this.PrestigeMenuButton.Size = new System.Drawing.Size(75, 23);
             this.PrestigeMenuButton.TabIndex = 3;
@@ -186,7 +186,7 @@ namespace AttackOfTheKarens {
             // MuteButton
             // 
             this.MuteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.MuteButton.Location = new System.Drawing.Point(1084, 650);
+            this.MuteButton.Location = new System.Drawing.Point(1084, 640);
             this.MuteButton.Name = "MuteButton";
             this.MuteButton.Size = new System.Drawing.Size(75, 23);
             this.MuteButton.TabIndex = 3;
@@ -197,7 +197,7 @@ namespace AttackOfTheKarens {
             // ItemsShopButton
             // 
             this.ItemsShopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ItemsShopButton.Location = new System.Drawing.Point(1084, 369);
+            this.ItemsShopButton.Location = new System.Drawing.Point(1084, 560);
             this.ItemsShopButton.Name = "ItemsShopButton";
             this.ItemsShopButton.Size = new System.Drawing.Size(75, 23);
             this.ItemsShopButton.TabIndex = 4;

@@ -50,10 +50,11 @@ namespace KarenLogic {
                 System.Random random = new System.Random();
                 float randF = (float)random.NextDouble();
                 int randI = random.Next(4, 7);
+                float score = randI + randF;
 
-                //score is multiplied based off of karen level
-                float score = randI+randF;
+                //score is multiplied based off of karen level and prestige level
                 score = score + score * Level;
+                score *= Game.PrestigeMoneyMultiplier;
 
                 Game.AddToScore(score);
                 this.Score = score;

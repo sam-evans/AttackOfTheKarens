@@ -133,6 +133,16 @@ namespace AttackOfTheKarens.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap fireworks {
+            get {
+                object obj = ResourceManager.GetObject("fireworks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap g {
             get {
                 object obj = ResourceManager.GetObject("g", resourceCulture);

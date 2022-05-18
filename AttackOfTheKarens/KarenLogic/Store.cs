@@ -16,6 +16,9 @@ namespace KarenLogic {
         //whether or not a karen was just defeated
         public bool IsDefeated() { return this.karen.IsDefeated; }
 
+        //whether or not the karen is present
+        public bool IsPresent() { return this.karen.IsPresent; }
+
         //reset the karen back to not defeated
         public void Reset() { this.karen.Reset(); }
 

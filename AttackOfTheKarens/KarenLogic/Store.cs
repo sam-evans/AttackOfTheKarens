@@ -49,17 +49,11 @@ namespace KarenLogic {
             if (karen.IsPresent && containsOwner)
             {
                 karen.Damage(GetUpdate()* Game.PrestigeDamageMultiplier);
-
             }
 
         }
-        public void Wipe()
-        {
-            if (karen.IsPresent)
-            {
-                karen.Damage(1000000);
-            }
-        }
-        
+
+        //instantly defeat a karen
+        public void Defeat() { if (karen.IsPresent) { karen.Defeat();  } }
     }
 }

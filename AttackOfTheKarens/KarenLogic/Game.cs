@@ -9,6 +9,8 @@ namespace KarenLogic {
         public static int PrestigeLevel { get; set; }
         public static int PrestigeDamageMultiplier { get; set; }
 
+        public static float BonusCash { get; set; }
+
         public static List<Form> openForms;
 
         static Game() {
@@ -17,6 +19,7 @@ namespace KarenLogic {
             PrestigeMoneyMultiplier = 1;
             PrestigeMenuCondition = 15f;
             PrestigeDamageMultiplier = 1;
+            BonusCash = 5f;
         }
 
         public static void AddToScore(float amount) { Score += amount; }

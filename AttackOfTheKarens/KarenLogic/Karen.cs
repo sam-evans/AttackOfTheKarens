@@ -72,6 +72,7 @@ namespace KarenLogic {
                 //score is multiplied based off of karen level and prestige multiplier
                 score = score + score * Level;
                 score *= Game.PrestigeMoneyMultiplier;
+                score += Game.BonusCash;
                 
                 Game.AddToScore(score);
                 this.Score = score;

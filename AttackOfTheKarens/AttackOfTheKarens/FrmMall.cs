@@ -411,7 +411,6 @@ namespace AttackOfTheKarens {
 
         private Direction OC_Move(Direction desiredMove)
         {
-            System.Diagnostics.Debug.WriteLine("COLLISIONS");
             //check for corners
             // Top Right Corner
             if (!CanMove(Direction.NORTH, out int newRow, out int newCol) && !CanMove(Direction.EAST, out newRow, out newCol) && !CanMove(Direction.NORTHEAST, out newRow, out newCol))
@@ -646,17 +645,15 @@ namespace AttackOfTheKarens {
             }
             else if (upgraded)
             {
-                System.Diagnostics.Debug.WriteLine("in the new movement");
 
                 //get the nearest karen
                 if (curHunted.Item1 == 999)
                 {
-                    System.Diagnostics.Debug.WriteLine("if1 got hunted");
                     curHunted = nextspwn.Dequeue();
                 }
                 else if (stores[curHunted.Item4].IsThere() == false)
                 {
-                    System.Diagnostics.Debug.WriteLine("if2 got hunted");
+
                     curHunted = nextspwn.Dequeue();
                 }
 
@@ -664,12 +661,10 @@ namespace AttackOfTheKarens {
                 // check to see if the current karen is visible
                 if (stores[curHunted.Item4].IsThere() && didnotmove == false)
                 {
-                    System.Diagnostics.Debug.WriteLine("main if: free movement");
                     //now that we found a karen, go to him/her
                     //check west
                     if (curHunted.Item2 == curposR && curHunted.Item3 < curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 1");
                         Direction dir = 0;
                         prevMove = 0;
                         toKaren.Add(dir);
@@ -678,7 +673,6 @@ namespace AttackOfTheKarens {
                     //check south west
                     else if (curHunted.Item2 > curposR && curHunted.Item3 < curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 1");
                         Direction dir = (Direction)1;
                         prevMove = 1;
                         toKaren.Add(dir);
@@ -687,7 +681,6 @@ namespace AttackOfTheKarens {
                     //check south
                     else if (curHunted.Item2 > curposR && curHunted.Item3 == curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 2");
                         Direction dir = (Direction)2;
                         prevMove = 2;
                         toKaren.Add(dir);
@@ -696,7 +689,6 @@ namespace AttackOfTheKarens {
                     //check south east
                     else if (curHunted.Item2 > curposR && curHunted.Item3 > curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 3");
                         Direction dir = (Direction)3;
                         prevMove = 3;
                         toKaren.Add(dir);
@@ -705,7 +697,6 @@ namespace AttackOfTheKarens {
                     //check east
                     else if (curHunted.Item2 == curposR && curHunted.Item3 > curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 4");
                         Direction dir = (Direction)4;
                         prevMove = 4;
                         toKaren.Add(dir);
@@ -714,7 +705,6 @@ namespace AttackOfTheKarens {
                     //check north east
                     else if (curHunted.Item2 < curposR && curHunted.Item3 > curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 5");
                         Direction dir = (Direction)5;
                         prevMove = 5;
                         toKaren.Add(dir);
@@ -723,7 +713,6 @@ namespace AttackOfTheKarens {
                     //check north
                     else if (curHunted.Item2 < curposR && curHunted.Item3 == curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 6");
                         Direction dir = (Direction)6;
                         prevMove = 6;
                         toKaren.Add(dir);
@@ -732,7 +721,6 @@ namespace AttackOfTheKarens {
                     //check norsth west
                     else if (curHunted.Item2 < curposR && curHunted.Item3 < curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 7");
                         Direction dir = (Direction)7;
                         prevMove = 7;
                         toKaren.Add(dir);
@@ -741,7 +729,6 @@ namespace AttackOfTheKarens {
                     //if on the karen
                     else if (curHunted.Item2 == curposR && curHunted.Item3 == curposC)
                     {
-                        System.Diagnostics.Debug.WriteLine("hiting if 8");
                         Direction dir = (Direction)8;
                         Move(dir);
                         toKaren.Clear();
@@ -750,16 +737,11 @@ namespace AttackOfTheKarens {
                             defeated = true;
                         }
                     }
-                    else
-                    {
-                        System.Diagnostics.Debug.WriteLine("failed free movement");
-                    }
 
                 }
                 //object collision
                 else if (stores[curHunted.Item4].IsThere() && didnotmove == true)
                 {
-                    System.Diagnostics.Debug.WriteLine("new movement OC");
                     Direction dir;
                     switch (prevMove)
                     {
@@ -809,7 +791,6 @@ namespace AttackOfTheKarens {
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("hit else after attempting free Move and OC");
                     Direction dir = (Direction)8; Move(dir);
                 }
 
@@ -818,10 +799,6 @@ namespace AttackOfTheKarens {
                 {
                     nextspwn.Enqueue(curHunted);
                 }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("shits fucked");
             }
         }
 

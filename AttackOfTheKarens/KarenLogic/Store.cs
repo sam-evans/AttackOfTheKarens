@@ -45,7 +45,7 @@ namespace KarenLogic {
         public void Update() {
             if (karen.IsPresent && containsOwner)
             {
-                karen.Damage(GetUpdate());
+                karen.Damage(GetUpdate()* Game.PrestigeDamageMultiplier);
 
             }
 

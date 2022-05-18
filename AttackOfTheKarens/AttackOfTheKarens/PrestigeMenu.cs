@@ -46,9 +46,17 @@ namespace AttackOfTheKarens
 
         private void PrestigePercentChanceButton_Click(object sender, EventArgs e)
         {
-            //TODO: Increase the chance to defeat karens
-            //TODO: Need to do somekind of game reset function when an upgrade is selceted.
-            //TODO: something to warn the player they need a certain amount of money before they can prestige and to increase the amount needed for the next prestige
+            // If the user can prestige, it doubles the multiplier
+            if (CheckIfCanPrestige())
+            {
+                Game.PrestigeDamageMultiplier += 2;
+                ResetAfterPrestige();
+            }
+            // If the user cannot prestige yet, it shows a warning message.
+            else
+            {
+                PrestigeNotEnoughMoneyText.Visible = true;
+            }
         }
         /// <summary>
         /// Changes the default movement algorithm to the improved algorithm

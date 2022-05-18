@@ -32,8 +32,8 @@ namespace AttackOfTheKarens {
         public static Label[] feedLabels = new Label[5];
 
         //animations
-        private PictureBox? dollarSign;
-        private MoveAnimation? dollarAni;
+        private LinkedList<PictureBox> dollarSign = new LinkedList<PictureBox>();
+        private LinkedList<MoveAnimation> dollarAni = new LinkedList<MoveAnimation>();
         private PictureBox? fireworks;
         private int fireworks_total_time = 3;
         private static bool fireworksOn = false;
@@ -251,24 +251,25 @@ namespace AttackOfTheKarens {
         /// <param name="x"></param>
         private void BeginDollarAnimation(int y, int x) {
 
-            
             //create dollar sign picture box if it isnt created already
-            if (dollarSign == null) { dollarSign = CreatePic(Properties.Resources.dollarSign, 0, 0); }
+            PictureBox curPic = CreatePic(Properties.Resources.dollarSign, 0, 0);
+            dollarSign.AddLast(curPic);
 
             //create a new animation for the sign at the given starting position
-            dollarAni = new MoveAnimation(y, x, -32, 0, 10);
-           
+            MoveAnimation curAni = new MoveAnimation(y, x, -32, 0, 10);
+            dollarAni.AddLast(curAni);
+
 
             //set the dollar sign to the starting position
-            dollarSign.Top = dollarAni.GetTop();
-            dollarSign.Left = dollarAni.GetLeft();
+            curPic.Top = curAni.GetTop();
+            curPic.Left = curAni.GetLeft();
 
             //add the dollar sign to controls
-            panMall.Controls.Add(dollarSign);
+            panMall.Controls.Add(curPic);
 
             //set the sign visible and at the front
-            dollarSign.Visible = true;
-            dollarSign.BringToFront();
+            curPic.Visible = true;
+            curPic.BringToFront();
             
         }
 
@@ -435,26 +436,48 @@ namespace AttackOfTheKarens {
             if (karen3.ImageReady()) { karen3.ImageGotten(); }
 
             //only perform dollar animation if it is currently active
-            if (dollarAni != null && dollarSign != null && dollarSign.Visible)
-            {
+            if (dollarAni.Count > 0 && dollarSign.Count > 0) {
 
-                //update animation
-                dollarAni.Update();
+                //keep track of which pictureboxes/animations should be removed AFTER they have been processed
+                LinkedList<PictureBox> toBeRemovedPic = new LinkedList<PictureBox>();
+                LinkedList<MoveAnimation> toBeRemovedAni = new LinkedList<MoveAnimation>();
 
-                //grab new image positions from animation
-                dollarSign.Top = dollarAni.GetTop();
-                dollarSign.Left = dollarAni.GetLeft();
+                //check each picturebox in the list of pictureboxes for dollar signs
+                int element = 0;
+                foreach (PictureBox curPic in dollarSign) {
 
-                //if animation is done then set the dollar sign back to not visible
-                if (dollarAni.isDone()) { dollarSign.Visible = false; }
+                    //if the picture is currently visible, perform animation and check if animation is done
+                    if (curPic.Visible) {
+                        MoveAnimation curAni = dollarAni.ElementAt(element);
+                        curAni.Update();
+
+                        curPic.Top = curAni.GetTop();
+                        curPic.Left = curAni.GetLeft();
+
+                        if (curAni.isDone()) {
+                            curPic.Visible = false;
+                            toBeRemovedPic.AddLast(curPic);
+                            toBeRemovedAni.AddLast(curAni);
+                        }
+                    }
+                    element++;
+                }
+
+                //remove all tagged pictureboxes/animations
+                foreach (PictureBox curPic in toBeRemovedPic) { dollarSign.Remove(curPic); }
+                foreach (MoveAnimation curAni in toBeRemovedAni) { dollarAni.Remove(curAni); }
             }
 
             //fireworks animation
             if (fireworksOn) {
+
+                //start animation from beginning of gif if fireworks have not been started yet
                 if (fireworks == null) {
                     fireworks = CreatePic(Properties.Resources.fireworks, 300, this.Width-300, 165, 165);
                     panMall.Controls.Add(fireworks);
                 }
+
+                //if animation time is over, remove animation completely and turn off fireworks
                 if (DateTime.Now.Second - fireworks_start_time > fireworks_total_time) {
                     panMall.Controls.Remove(fireworks);
                     fireworks = null;
@@ -499,27 +522,16 @@ namespace AttackOfTheKarens {
             popup.Dispose();
         }
 
-      
-
-        public static void WipeButton()
-        {
-           
-            
-            for (int p = 0; p < stores.Count(); p++)
-            {
-                stores[p].Wipe();
-                
-            }
-            
+        //instantly defeat all karens
+        public static void WipeButton() {
+            for (int p = 0; p < stores.Count(); p++) { stores[p].Defeat(); }
         }
-        public static void Charisma(int i)
-        {
-            for (int p = 0; p < stores.Count(); p++)
-            {
-                stores[p].setUpdate(i);
 
+        
+        public static void Charisma(int i) {
+            for (int p = 0; p < stores.Count(); p++) {
+                stores[p].setUpdate(i);
             }
-            
         }
         
     }

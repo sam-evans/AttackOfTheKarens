@@ -27,6 +27,17 @@ namespace AttackOfTheKarens {
         private char[][] map;
         private static List<Store> stores;
 
+        // used for movement
+        private List<int> Kspwns;
+        private List<Direction> toKaren = new List<Direction>();
+        private Queue<Tuple<int, int, int, int>> nextspwn = new Queue<Tuple<int, int, int, int>>();
+        private Stack<int> reversePath = new Stack<int>();
+        private Tuple<int, int, int, int> curHunted = new Tuple<int, int, int, int>(999, 999, 999, 999);
+        private bool didnotmove = false;
+        private bool defeated = false;
+        private int prevMove;
+        private static bool upgraded = false;
+
         //publics
         public static bool[] feedAssigned = { false, false, false, false, false };
         public static Label[] feedLabels = new Label[5];
@@ -103,6 +114,9 @@ namespace AttackOfTheKarens {
             karen3.Add(Properties.Resources.karen30);
             karen3.Add(Properties.Resources.karen31);
 
+            //Save the spawns for use in movement calculations
+            Kspwns = new List<int>();
+
             PictureBox pic = null;
             foreach (char[] array in map) {
                 foreach (char c in array) {
@@ -116,6 +130,13 @@ namespace AttackOfTheKarens {
                             });
                             stores.Add(s);
                             panMall.Controls.Add(healthBar);
+
+                            //save the position of the karen for later use
+                            int Row = top / CELL_SIZE;
+                            int Col = left / CELL_SIZE;
+
+                            Kspwns.Add(Row);
+                            Kspwns.Add(Col);
                             break;
                         case 'o':
                             owner = CreatePic(Properties.Resources.owner0, top, left);
@@ -211,10 +232,15 @@ namespace AttackOfTheKarens {
             newRow = yOwner;
             newCol = xOwner;
             switch (dir) {
-                case Direction.UP: newRow--; break;
-                case Direction.DOWN: newRow++; break;
-                case Direction.LEFT: newCol--; break;
-                case Direction.RIGHT: newCol++; break;
+                case Direction.NORTH: newRow--; break;
+                case Direction.SOUTH: newRow++; break;
+                case Direction.WEST: newCol--; break;
+                case Direction.EAST: newCol++; break;
+                case Direction.NORTHWEST: newRow--; newCol--; break;
+                case Direction.NORTHEAST: newRow--; newCol++; break;
+                case Direction.SOUTHEAST: newRow++; newCol++; break;
+                case Direction.SOUTHWEST: newRow++; newCol--; break;
+                case Direction.NOMOVE: break;
             }
             return (IsInBounds(newRow, newCol) && IsWalkable(newRow, newCol));
         }
@@ -245,6 +271,11 @@ namespace AttackOfTheKarens {
                     }
                     break;
                 }
+                didnotmove = false;
+            }
+            else
+            {
+                didnotmove = true;
             }
         }
 
@@ -279,10 +310,10 @@ namespace AttackOfTheKarens {
 
         private void FrmMall_KeyUp(object sender, KeyEventArgs e) {
             switch (e.KeyCode) {
-                case Keys.Up: Move(Direction.UP); break;
-                case Keys.Down: Move(Direction.DOWN); break;
-                case Keys.Left: Move(Direction.LEFT); break;
-                case Keys.Right: Move(Direction.RIGHT); break;
+                case Keys.Up: Move(Direction.NORTH); break;
+                case Keys.Down: Move(Direction.SOUTH); break;
+                case Keys.Left: Move(Direction.WEST); break;
+                case Keys.Right: Move(Direction.EAST); break;
             }
         }
 
@@ -378,9 +409,420 @@ namespace AttackOfTheKarens {
             }
         }
 
+        private Direction OC_Move(Direction desiredMove)
+        {
+            System.Diagnostics.Debug.WriteLine("COLLISIONS");
+            //check for corners
+            // Top Right Corner
+            if (!CanMove(Direction.NORTH, out int newRow, out int newCol) && !CanMove(Direction.EAST, out newRow, out newCol) && !CanMove(Direction.NORTHEAST, out newRow, out newCol))
+            {
+                if (toKaren.Contains(Direction.SOUTH))
+                {
+                    if (!CanMove(Direction.EAST, out newRow, out newCol))
+                    {
+                        prevMove = 4;
+                        Move(Direction.SOUTH);
+                        Move(Direction.SOUTH);
+                        return Direction.EAST;
+                    }
+                }
+                else if (CanMove(Direction.SOUTH, out newRow, out newCol))
+                {
+                    prevMove = 2;
+                    Move(Direction.SOUTH);
+                    Move(Direction.SOUTH);
+                    return Direction.SOUTH;
+                }
+
+            }
+            // Bottom Right Corner
+            else if (!CanMove(Direction.SOUTH, out newRow, out newCol) && !CanMove(Direction.EAST, out newRow, out newCol) && !CanMove(Direction.SOUTHEAST, out newRow, out newCol))
+            {
+                if (!CanMove(Direction.SOUTH, out newRow, out newCol))
+                {
+                    prevMove = 2;
+                    Move(Direction.WEST);
+                    Move(Direction.SOUTH);
+                    return Direction.SOUTH;
+                }
+            }
+            // Bottom Left Corner
+            else if (!CanMove(Direction.SOUTH, out newRow, out newCol) && !CanMove(Direction.WEST, out newRow, out newCol) && !CanMove(Direction.SOUTHWEST, out newRow, out newCol))
+            {
+                if (toKaren.Contains(Direction.SOUTHWEST))
+                {
+                    prevMove = 2;
+                    Move(Direction.EAST);
+                    Move(Direction.NORTH);
+                    return Direction.EAST;
+                }
+                if (CanMove(Direction.EAST, out newRow, out newCol))
+                {
+                    prevMove = 2;
+                    Move(Direction.EAST);
+                    Move(Direction.SOUTH);
+                    return Direction.EAST;
+                }
+            }
+            // Top Left
+            else if (!CanMove(Direction.NORTH, out newRow, out newCol) && !CanMove(Direction.WEST, out newRow, out newCol) && !CanMove(Direction.NORTHWEST, out newRow, out newCol))
+            {
+                if (toKaren.Contains(Direction.SOUTHWEST) && toKaren.Contains(Direction.WEST))
+                {
+                    prevMove = 4;
+                    Move(Direction.EAST);
+                    Move(Direction.EAST);
+                    Move(Direction.SOUTH);
+                    Move(Direction.SOUTH);
+                    Move(Direction.SOUTH);
+                    Move(Direction.WEST);
+                    Move(Direction.WEST);
+                    Move(Direction.WEST);
+                    return Direction.SOUTH;
+                }
+                else if (toKaren.Contains(Direction.NORTH) || toKaren.Contains(Direction.NORTHWEST))
+                {
+                    prevMove = 6;
+                    Move(Direction.EAST);
+                    Move(Direction.NORTH);
+                    return Direction.NORTH;
+                }
+            }
+            //shouldn't be in a corner anymore
+            switch (desiredMove)
+            {
+                // north east
+                case Direction.NORTHEAST:
+                    //check which direction is blocked
+                    if (toKaren.Contains(Direction.NORTH))
+                    {
+                        prevMove = 2;
+                        Move(Direction.SOUTH);
+                        return Direction.SOUTH;
+                    }
+                    if (CanMove(Direction.EAST, out newRow, out newCol))
+                    {
+                        prevMove = 4;
+                        return Direction.EAST;
+                    }
+                    else if (CanMove(Direction.NORTH, out newRow, out newCol))
+                    {
+                        prevMove = 6;
+                        return Direction.NORTH;
+                    }
+                    break;
+                case Direction.NORTH:
+                    if (toKaren.Contains(Direction.NORTHEAST))
+                    {
+                        if (CanMove(Direction.EAST, out newRow, out newCol))
+                        {
+                            prevMove = 4;
+                            Move(Direction.EAST);
+                            return Direction.EAST;
+                        }
+                    }
+                    else if (CanMove(Direction.EAST, out newRow, out newCol))
+                    {
+                        prevMove = 4;
+                        Move(Direction.EAST);
+                        return Direction.EAST;
+                    }
+                    break;
+                case Direction.NORTHWEST:
+                    if (CanMove(Direction.NORTH, out newRow, out newCol))
+                    {
+                        prevMove = 6;
+                        return Direction.NORTH;
+                    }
+                    else if (CanMove(Direction.WEST, out newRow, out newCol))
+                    {
+                        prevMove = 4;
+                        return Direction.WEST;
+                    }
+                    break;
+                case Direction.EAST:
+                    if (toKaren.Contains(Direction.NORTH))
+                    {
+                        prevMove = 2;
+                        return Direction.SOUTH;
+                    }
+                    else if (CanMove(Direction.NORTH, out newRow, out newCol))
+                    {
+                        prevMove = 6;
+                        return Direction.NORTH;
+                    }
+                    break;
+                case Direction.WEST:
+                    if (CanMove(Direction.SOUTHWEST, out newRow, out newCol))
+                    {
+                        prevMove = 1;
+                        return Direction.SOUTHWEST;
+                    }
+                    break;
+                case Direction.SOUTHEAST:
+                    if (CanMove(Direction.EAST, out newRow, out newCol))
+                    {
+
+                        prevMove = 4;
+                        return Direction.EAST;
+                    }
+                    else if (CanMove(Direction.SOUTH, out newRow, out newCol))
+                    {
+                        prevMove = 2;
+                        Move(Direction.SOUTH);
+                        return Direction.SOUTH;
+                    }
+                    break;
+                case Direction.SOUTHWEST:
+                    if (CanMove(Direction.EAST, out newRow, out newCol))
+                    {
+                        prevMove = 4;
+                        return Direction.EAST;
+                    }
+                    break;
+                case Direction.SOUTH:
+                    if (toKaren.Contains(Direction.WEST))
+                    {
+                        prevMove = 4;
+                        return Direction.EAST;
+                    }
+                    break;
+            }
+            return Direction.NOMOVE;
+        }
+
+        public static void upgradeMove() { upgraded = true; }
+
         private void tmrMoveOwner_Tick(object sender, EventArgs e) {
-            Direction dir = (Direction)rand.Next(4);
-            Move(dir);
+            //get Managers current position in the map
+            int curposR = owner.Top / CELL_SIZE;
+            int curposC = owner.Left / CELL_SIZE;
+            var Kdist = new List<Tuple<int, int, int, int>> { };
+            double dist;
+            double temp;
+            int j = 0;
+            Tuple<int, int, int, int> nearestKarenTup = new(999, 999, 999, 999);
+            // use a queue to determine which karen we should go to
+            // Tuple: (dist, Row, Col, Store)
+            //NOTE: dist is calculated once, at the original spawn of the owner.
+            //find the positions of the karens
+            if (nextspwn.Count() == null)
+            {
+                nextspwn = new Queue<Tuple<int, int, int, int>>();
+            }
+
+            if (nextspwn.Count() == 0)
+            {
+                for (int i = 0; i < Kspwns.LongCount(); i = i + 2)
+                {
+                    //find the nearest karen
+                    // check each karens position and determine which karen is closest
+                    var curKaren = Tuple.Create(Kspwns[i], Kspwns[i + 1]);
+                    temp = Math.Pow((curposC - curKaren.Item2), 2) + Math.Pow((curposR - curKaren.Item1), 2);
+                    dist = Math.Sqrt(temp);
+                    // Tuple: <Dist to karen, Row, Col, Store#>
+                    Kdist.Add(new Tuple<int, int, int, int>((int)dist, curKaren.Item1, curKaren.Item2, j));
+
+                    //get the nearest karen and save the tuple for later use
+                    j++;
+                }
+                //create a queue where the first item is the closest karen and the last item is the farthest karen
+                int leng = Kdist.Count();
+                for (int n = 0; n < leng; n++)
+                {
+                    nearestKarenTup = Kdist.Min();
+                    Kdist.Remove(nearestKarenTup);
+                    nextspwn.Enqueue(nearestKarenTup);
+
+                }
+
+            }
+
+
+            if (!upgraded)
+            {
+                Direction dir = (Direction)rand.Next(8);
+                Move(dir);
+            }
+            else if (upgraded)
+            {
+                System.Diagnostics.Debug.WriteLine("in the new movement");
+
+                //get the nearest karen
+                if (curHunted.Item1 == 999)
+                {
+                    System.Diagnostics.Debug.WriteLine("if1 got hunted");
+                    curHunted = nextspwn.Dequeue();
+                }
+                else if (stores[curHunted.Item4].IsThere() == false)
+                {
+                    System.Diagnostics.Debug.WriteLine("if2 got hunted");
+                    curHunted = nextspwn.Dequeue();
+                }
+
+                //free movement
+                // check to see if the current karen is visible
+                if (stores[curHunted.Item4].IsThere() && didnotmove == false)
+                {
+                    System.Diagnostics.Debug.WriteLine("main if: free movement");
+                    //now that we found a karen, go to him/her
+                    //check west
+                    if (curHunted.Item2 == curposR && curHunted.Item3 < curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 1");
+                        Direction dir = 0;
+                        prevMove = 0;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //check south west
+                    else if (curHunted.Item2 > curposR && curHunted.Item3 < curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 1");
+                        Direction dir = (Direction)1;
+                        prevMove = 1;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //check south
+                    else if (curHunted.Item2 > curposR && curHunted.Item3 == curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 2");
+                        Direction dir = (Direction)2;
+                        prevMove = 2;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //check south east
+                    else if (curHunted.Item2 > curposR && curHunted.Item3 > curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 3");
+                        Direction dir = (Direction)3;
+                        prevMove = 3;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //check east
+                    else if (curHunted.Item2 == curposR && curHunted.Item3 > curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 4");
+                        Direction dir = (Direction)4;
+                        prevMove = 4;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //check north east
+                    else if (curHunted.Item2 < curposR && curHunted.Item3 > curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 5");
+                        Direction dir = (Direction)5;
+                        prevMove = 5;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //check north
+                    else if (curHunted.Item2 < curposR && curHunted.Item3 == curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 6");
+                        Direction dir = (Direction)6;
+                        prevMove = 6;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //check norsth west
+                    else if (curHunted.Item2 < curposR && curHunted.Item3 < curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 7");
+                        Direction dir = (Direction)7;
+                        prevMove = 7;
+                        toKaren.Add(dir);
+                        Move(dir);
+                    }
+                    //if on the karen
+                    else if (curHunted.Item2 == curposR && curHunted.Item3 == curposC)
+                    {
+                        System.Diagnostics.Debug.WriteLine("hiting if 8");
+                        Direction dir = (Direction)8;
+                        Move(dir);
+                        toKaren.Clear();
+                        if (stores[curHunted.Item4].getHealthBars() == 0)
+                        {
+                            defeated = true;
+                        }
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("failed free movement");
+                    }
+
+                }
+                //object collision
+                else if (stores[curHunted.Item4].IsThere() && didnotmove == true)
+                {
+                    System.Diagnostics.Debug.WriteLine("new movement OC");
+                    Direction dir;
+                    switch (prevMove)
+                    {
+                        //west
+                        case 0:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        //south west
+                        case 1:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        //south
+                        case 2:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        //south east
+                        case 3:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        //east
+                        case 4:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        //north east
+                        case 5:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        //north
+                        case 6:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        //northwest
+                        case 7:
+                            dir = OC_Move((Direction)prevMove);
+                            Move(dir);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine("hit else after attempting free Move and OC");
+                    Direction dir = (Direction)8; Move(dir);
+                }
+
+                //put the karen back after defeating her
+                if (curHunted.Item1 != 999)
+                {
+                    nextspwn.Enqueue(curHunted);
+                }
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("shits fucked");
+            }
         }
 
         private void tmrUpdateGame_Tick(object sender, EventArgs e) {

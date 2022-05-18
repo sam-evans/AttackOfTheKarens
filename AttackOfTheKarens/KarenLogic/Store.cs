@@ -16,6 +16,13 @@ namespace KarenLogic {
         //whether or not a karen was just defeated
         public bool IsDefeated() { return this.karen.IsDefeated; }
 
+        /// <summary>
+        /// Returns true if the Karen is on screen.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsThere() { return this.karen.IsPresent; }
+        public bool Isinstore() { return containsOwner; }
+
         //whether or not the karen is present
         public bool IsPresent() { return this.karen.IsPresent; }
 

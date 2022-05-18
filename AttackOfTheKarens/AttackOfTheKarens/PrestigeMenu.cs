@@ -56,6 +56,17 @@ namespace AttackOfTheKarens
 
         private void PrestigeOwnerMovementButton_Click(object sender, EventArgs e)
         {
+            // If the user can prestige, it upgrades the movement
+            if (CheckIfCanPrestige())
+            {
+                FrmMall.upgradeMove();
+                ResetAfterPrestige();
+            }
+            // If the user cannot prestige yet, it shows a warning message.
+            else
+            {
+                PrestigeNotEnoughMoneyText.Visible = true;
+            }
             //TODO: Switch to the better pathfinding algorithm (Should only allow the user to do this once)
             //TODO: Need to do somekind of game reset function when an upgrade is selceted.
             //TODO: something to warn the player they need a certain amount of money before they can prestige and to increase the amount needed for the next prestige

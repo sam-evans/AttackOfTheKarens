@@ -34,12 +34,16 @@ namespace AttackOfTheKarens {
         //once all desired frames of an animation have been 
         private bool complete;
 
+        //how many entities are using this animation
+        private int entityCount;
+
         /// <summary>
         /// Create an animation where each frame lasts for the desired amount of time. 1 total_time = 0.1 seconds.
         /// </summary>
         /// <param name="total_time"></param>
         public FrameAnimation(int total_time) {
             this.total_time = total_time;
+            this.entityCount = 1;
 
             //default states
             this.curAni = 0;
@@ -82,6 +86,14 @@ namespace AttackOfTheKarens {
         }
 
         /// <summary>
+        /// If multiple entities use this animation, "imageReady" must be manually set
+        /// </summary>
+        /// <returns></returns>
+        public Image GetImageMulti() {
+            return imageList.ElementAt(curAni);
+        }
+
+        /// <summary>
         /// Should be executed each tick. Keeps track of animation timer and sets the next image to be ready once the current frame time has
         /// reached the total frame time.
         /// </summary>
@@ -104,6 +116,11 @@ namespace AttackOfTheKarens {
         /// </summary>
         /// <returns></returns>
         public bool ImageReady() { return imageReady; }
+
+        /// <summary>
+        /// Force image to no longer be ready (used for animations that are tied to multiple entities)
+        /// </summary>
+        public void ImageGotten() { imageReady = false; }
     }
 
     /// <summary>

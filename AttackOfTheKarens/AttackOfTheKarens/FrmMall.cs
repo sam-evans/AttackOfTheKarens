@@ -22,7 +22,6 @@ namespace AttackOfTheKarens {
         // other privates
         private SoundPlayer player;
         private SoundPlayer player1;
-        private PictureBox picOwner;
         private int xOwner;
         private int yOwner;
         private char[][] map;
@@ -33,14 +32,18 @@ namespace AttackOfTheKarens {
         public static Label[] feedLabels = new Label[5];
 
         //animations
-        private PictureBox testPic;
-        private FrameAnimation testAni;
         private PictureBox? dollarSign;
         private MoveAnimation? dollarAni;
         private PictureBox? fireworks;
         private int fireworks_total_time = 3;
         private static bool fireworksOn = false;
         private static int fireworks_start_time;
+        private PictureBox owner;
+        private FrameAnimation ownerAni;
+        private FrameAnimation karen0;
+        private FrameAnimation karen1;
+        private FrameAnimation karen2;
+        private FrameAnimation karen3;
 
 
         // ctor
@@ -86,28 +89,26 @@ namespace AttackOfTheKarens {
             int top = 0;
             int left = 0;
 
-            //create a new animation
-            //this animation will update every 1 * 0.1 seconds.
-            testAni = new FrameAnimation(10);
-
-            //add the images for 1, 2 and 3 to the animation
-            testAni.Add(Properties.Resources.one);
-            testAni.Add(Properties.Resources.two);
-            testAni.Add(Properties.Resources.three);
-
-            //create a picture box. the image inside the picture box gets replaced
-            //by images in the animations object
-            testPic = CreatePic(testAni.Complete(), 0, 0);
-
-            //add the picture box to the mall control.
-            /* panMall.Controls.Add(testPic); */
+            //karen animations
+            karen0 = new FrameAnimation(1);
+            karen0.Add(Properties.Resources.karen00);
+            karen0.Add(Properties.Resources.karen01);
+            karen1 = new FrameAnimation(1);
+            karen1.Add(Properties.Resources.karen10);
+            karen1.Add(Properties.Resources.karen11);
+            karen2 = new FrameAnimation(1);
+            karen2.Add(Properties.Resources.karen20);
+            karen2.Add(Properties.Resources.karen21);
+            karen3 = new FrameAnimation(1);
+            karen3.Add(Properties.Resources.karen30);
+            karen3.Add(Properties.Resources.karen31);
 
             PictureBox pic = null;
             foreach (char[] array in map) {
                 foreach (char c in array) {
                     switch (c) {
                         case 'K':
-                            pic = CreatePic(Properties.Resources.karen0, top, left);
+                            pic = CreatePic(Properties.Resources.karen00, top, left);
                             PictureBox healthBar = CreatePic(Properties.Resources.health8, top+CELL_SIZE, left, CELL_SIZE, 8);
                             Store s = new Store(new Karen(pic, healthBar) {
                             Row = top / CELL_SIZE,
@@ -117,10 +118,13 @@ namespace AttackOfTheKarens {
                             panMall.Controls.Add(healthBar);
                             break;
                         case 'o':
-                            picOwner = CreatePic(Properties.Resources.owner, top, left);
+                            owner = CreatePic(Properties.Resources.owner0, top, left);
+                            ownerAni = new FrameAnimation(1);
+                            ownerAni.Add(Properties.Resources.owner0);
+                            ownerAni.Add(Properties.Resources.owner1);
                             xOwner = left / CELL_SIZE;
                             yOwner = top / CELL_SIZE;
-                            panMall.Controls.Add(picOwner);
+                            panMall.Controls.Add(owner);
                             break;
                         case 'w': pic = CreatePic(Properties.Resources.water, top, left); break;
                         case '-': pic = CreateWall(color, Properties.Resources.hline, top, left); break;
@@ -143,7 +147,7 @@ namespace AttackOfTheKarens {
                 top += CELL_SIZE;
             }
 
-            picOwner.BringToFront();
+            owner.BringToFront();
             panMall.Width = CELL_SIZE * map[0].Length + PANEL_PADDING + 165;
             panMall.Height = CELL_SIZE * map.Length + PANEL_PADDING;
             this.Width = panMall.Width + FORM_PADDING + 75;
@@ -215,8 +219,8 @@ namespace AttackOfTheKarens {
             if (CanMove(dir, out int newRow, out int newCol)) {
                 yOwner = newRow;
                 xOwner = newCol;
-                picOwner.Top = yOwner * CELL_SIZE;
-                picOwner.Left = xOwner * CELL_SIZE;
+                owner.Top = yOwner * CELL_SIZE;
+                owner.Left = xOwner * CELL_SIZE;
                 char mapTile = map[newRow][newCol];
                 switch (mapTile) {
                     case '0':
@@ -284,10 +288,10 @@ namespace AttackOfTheKarens {
             //set karen image based off of karen level
             int level = s.GetLevel();
             Image img;
-            if (level == 0) { img = Properties.Resources.karen0; }
-            else if (level == 1) { img = Properties.Resources.karen1; }
-            else if (level == 2) { img = Properties.Resources.karen2; }
-            else { img = Properties.Resources.karen3; }
+            if (level == 0) { img = Properties.Resources.karen00; }
+            else if (level == 1) { img = Properties.Resources.karen10; }
+            else if (level == 2) { img = Properties.Resources.karen20; }
+            else { img = Properties.Resources.karen30; }
             s.GetKarenPB().Image = img;
         }
 
@@ -395,10 +399,40 @@ namespace AttackOfTheKarens {
         private void tmrAnimationsUpdate_Tick(object sender, EventArgs e)
         {
             //update the animation so it knows when to go to the next frame
-            testAni.Update();
+            ownerAni.Update();
+            karen0.Update();
+            karen1.Update();
+            karen2.Update();
+            karen3.Update();
 
             //if the next frame is ready, replace the image in the picture box
-            if (testAni.ImageReady()) { testPic.Image = testAni.GetImage(); }
+            if (ownerAni.ImageReady()) { owner.Image = ownerAni.GetImage(); }
+
+            //karen animations are special; multiple entities tied to one animation. requires different functions
+            foreach (Store store in stores) {
+                if (store.IsPresent()) {
+                    switch (store.GetLevel()) {
+                        case 0:
+                            store.GetKarenPB().Image = karen0.GetImageMulti();
+                            break;
+                        case 1:
+                            store.GetKarenPB().Image = karen1.GetImageMulti();
+                            break;
+                        case 2:
+                            store.GetKarenPB().Image = karen2.GetImageMulti();
+                            break;
+                        case 3:
+                            store.GetKarenPB().Image = karen3.GetImageMulti();
+                            break;
+                    }
+                }
+            }
+
+            //manually set imageready to false in karen animations after frames have already been retrieved
+            if (karen0.ImageReady()) { karen0.ImageGotten(); }
+            if (karen1.ImageReady()) { karen1.ImageGotten(); }
+            if (karen2.ImageReady()) { karen2.ImageGotten(); }
+            if (karen3.ImageReady()) { karen3.ImageGotten(); }
 
             //only perform dollar animation if it is currently active
             if (dollarAni != null && dollarSign != null && dollarSign.Visible)

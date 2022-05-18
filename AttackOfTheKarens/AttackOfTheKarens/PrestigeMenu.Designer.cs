@@ -56,7 +56,7 @@ namespace AttackOfTheKarens
             this.PrestigePercentChanceButton.Name = "PrestigePercentChanceButton";
             this.PrestigePercentChanceButton.Size = new System.Drawing.Size(182, 58);
             this.PrestigePercentChanceButton.TabIndex = 3;
-            this.PrestigePercentChanceButton.Text = "Upgrade Percent Change";
+            this.PrestigePercentChanceButton.Text = "Upgrade Damage To Karens";
             this.PrestigePercentChanceButton.UseVisualStyleBackColor = true;
             this.PrestigePercentChanceButton.Click += new System.EventHandler(this.PrestigePercentChanceButton_Click);
             // 

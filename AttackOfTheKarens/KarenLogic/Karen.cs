@@ -67,7 +67,7 @@ namespace KarenLogic {
 
         //do damage to a karen and deal with her if she gets defeated
         public void Damage(int amount) {
-            Health -= amount;
+            Health -= amount + Game.PrestigeDamageMultiplier;
             if (Health < 0) {
                 
                 //create a random score from 4 to 6 dollars.

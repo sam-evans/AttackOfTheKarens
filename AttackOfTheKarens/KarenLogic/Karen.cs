@@ -33,6 +33,7 @@ namespace KarenLogic {
             this.maxHealth = this.Health;
         }
 
+        //spawn a karen
         public void Appear() {
             if (this.IsPresent) { return; }
 
@@ -59,6 +60,12 @@ namespace KarenLogic {
             this.maxHealth = this.Health;
         }
 
+        //instantly do as much damage to a karen as she has hp
+        public void Defeat() {
+            Damage(maxHealth+1);
+        }
+
+        //do damage to a karen and deal with her if she gets defeated
         public void Damage(int amount) {
             Health -= amount;
             if (Health < 0) {

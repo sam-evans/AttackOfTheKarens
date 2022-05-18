@@ -175,17 +175,29 @@
   <data name="hline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\hline.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="karen0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\karen0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="karen00" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen00.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="karen1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\karen1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="karen01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="karen2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\karen2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="karen10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="karen3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\karen3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="karen11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="karen20" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen20.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="karen21" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen21.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="karen30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="karen31" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\karen31.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="karen_music" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\karen music.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -196,8 +208,11 @@
   <data name="one" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\one.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="owner" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\data\owner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="owner0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\owner0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="owner1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\data\owner1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="three" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\data\three.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

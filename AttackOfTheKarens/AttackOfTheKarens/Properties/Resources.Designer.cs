@@ -263,9 +263,9 @@ namespace AttackOfTheKarens.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap karen0 {
+        internal static System.Drawing.Bitmap karen00 {
             get {
-                object obj = ResourceManager.GetObject("karen0", resourceCulture);
+                object obj = ResourceManager.GetObject("karen00", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -273,9 +273,9 @@ namespace AttackOfTheKarens.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap karen1 {
+        internal static System.Drawing.Bitmap karen01 {
             get {
-                object obj = ResourceManager.GetObject("karen1", resourceCulture);
+                object obj = ResourceManager.GetObject("karen01", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -283,9 +283,9 @@ namespace AttackOfTheKarens.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap karen2 {
+        internal static System.Drawing.Bitmap karen10 {
             get {
-                object obj = ResourceManager.GetObject("karen2", resourceCulture);
+                object obj = ResourceManager.GetObject("karen10", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,9 +293,49 @@ namespace AttackOfTheKarens.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap karen3 {
+        internal static System.Drawing.Bitmap karen11 {
             get {
-                object obj = ResourceManager.GetObject("karen3", resourceCulture);
+                object obj = ResourceManager.GetObject("karen11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap karen20 {
+            get {
+                object obj = ResourceManager.GetObject("karen20", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap karen21 {
+            get {
+                object obj = ResourceManager.GetObject("karen21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap karen30 {
+            get {
+                object obj = ResourceManager.GetObject("karen30", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap karen31 {
+            get {
+                object obj = ResourceManager.GetObject("karen31", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,9 +363,19 @@ namespace AttackOfTheKarens.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap owner {
+        internal static System.Drawing.Bitmap owner0 {
             get {
-                object obj = ResourceManager.GetObject("owner", resourceCulture);
+                object obj = ResourceManager.GetObject("owner0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap owner1 {
+            get {
+                object obj = ResourceManager.GetObject("owner1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

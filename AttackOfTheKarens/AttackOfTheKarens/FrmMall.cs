@@ -26,7 +26,7 @@ namespace AttackOfTheKarens {
         private int xOwner;
         private int yOwner;
         private char[][] map;
-        public static List<Store> stores;
+        private static List<Store> stores;
 
         //publics
         public static bool[] feedAssigned = { false, false, false, false, false };
@@ -41,6 +41,7 @@ namespace AttackOfTheKarens {
         private int fireworks_total_time = 3;
         private static bool fireworksOn = false;
         private static int fireworks_start_time;
+
 
         // ctor
         public FrmMall() {
@@ -294,7 +295,7 @@ namespace AttackOfTheKarens {
             Game.openForms.Remove(this);
             Game.CloseAll();
         }
-
+        int j = 1;
         private void tmrUpdateKarens_Tick(object sender, EventArgs e) {
             if (stores != null && stores.Count > 0) {
                 foreach (Store store in stores) {
@@ -390,6 +391,7 @@ namespace AttackOfTheKarens {
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        
         private void tmrAnimationsUpdate_Tick(object sender, EventArgs e)
         {
             //update the animation so it knows when to go to the next frame
@@ -472,8 +474,19 @@ namespace AttackOfTheKarens {
             for (int p = 0; p < stores.Count(); p++)
             {
                 stores[p].Wipe();
+                
             }
             
         }
+        public static void Charisma(int i)
+        {
+            for (int p = 0; p < stores.Count(); p++)
+            {
+                stores[p].setUpdate(i);
+
+            }
+            
+        }
+        
     }
 }

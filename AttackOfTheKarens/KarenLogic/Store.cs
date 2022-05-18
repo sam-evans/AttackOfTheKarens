@@ -36,10 +36,19 @@ namespace KarenLogic {
         public void ResetOwner() { containsOwner = false; }
 
         //update karen hp
+        public int _damage = 1;
+        public int GetUpdate() { return _damage; }
+        public void setUpdate(int d)
+        {
+           _damage = d;
+        }
         public void Update() {
-            if (karen.IsPresent && containsOwner) {
-                karen.Damage(1);
+            if (karen.IsPresent && containsOwner)
+            {
+                karen.Damage(GetUpdate());
+
             }
+
         }
         public void Wipe()
         {
@@ -48,5 +57,6 @@ namespace KarenLogic {
                 karen.Damage(1000000);
             }
         }
+        
     }
 }

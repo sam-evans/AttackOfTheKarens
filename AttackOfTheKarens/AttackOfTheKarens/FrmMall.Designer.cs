@@ -32,6 +32,8 @@ namespace AttackOfTheKarens {
             this.tmrUpdateKarens = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveOwner = new System.Windows.Forms.Timer(this.components);
             this.lblPrestige = new System.Windows.Forms.Label();
+            this.lblNextPrestigeCostLabel = new System.Windows.Forms.Label();
+            this.lblNextPrestigeCost = new System.Windows.Forms.Label();
             this.lblMoneySaved = new System.Windows.Forms.Label();
             this.lblMoneySavedLabel = new System.Windows.Forms.Label();
             this.lblMoneyFeed1 = new System.Windows.Forms.Label();
@@ -100,6 +102,30 @@ namespace AttackOfTheKarens {
             this.lblMoneySavedLabel.TabIndex = 2;
             this.lblMoneySavedLabel.Text = "Money Saved:";
             this.lblMoneySavedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblNextPrestigeCostLabel
+            //
+            this.lblNextPrestigeCostLabel.AutoSize = true;
+            this.lblNextPrestigeCostLabel.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNextPrestigeCostLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(125)))), ((int)(((byte)(0)))));
+            this.lblNextPrestigeCostLabel.Location = new System.Drawing.Point(917, 6);
+            this.lblNextPrestigeCostLabel.Name = "lblNextPrestigeCostLabel";
+            this.lblNextPrestigeCostLabel.Size = new System.Drawing.Size(137, 25);
+            this.lblNextPrestigeCostLabel.TabIndex = 2;
+            this.lblNextPrestigeCostLabel.Text = "Next Prestige:";
+            this.lblNextPrestigeCostLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            //
+            // lblNextPrestigeCost
+            //
+            this.lblNextPrestigeCost.AutoSize = true;
+            this.lblNextPrestigeCost.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblNextPrestigeCost.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(125)))), ((int)(((byte)(0)))));
+            this.lblNextPrestigeCost.Location = new System.Drawing.Point(917, 6);
+            this.lblNextPrestigeCost.Name = "lblNextPrestigeCost";
+            this.lblMoneySaved.Size = new System.Drawing.Size(84, 32);
+            this.lblNextPrestigeCost.TabIndex = 2;
+            this.lblNextPrestigeCost.Text = "$15.00";
+            this.lblNextPrestigeCost.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             //
             // lblPrestige
             //
@@ -236,6 +262,8 @@ namespace AttackOfTheKarens {
             this.Controls.Add(this.MuteButton);
             this.Controls.Add(this.PrestigeMenuButton);
             this.Controls.Add(this.lblPrestige);
+            this.Controls.Add(this.lblNextPrestigeCostLabel);
+            this.Controls.Add(this.lblNextPrestigeCost);
             this.Controls.Add(this.lblMoneySavedLabel);
             this.Controls.Add(this.lblMoneySaved);
             this.Controls.Add(this.lblMoneyFeed1);
@@ -262,6 +290,8 @@ namespace AttackOfTheKarens {
     private System.Windows.Forms.Timer tmrUpdateKarens;
     private System.Windows.Forms.Timer tmrMoveOwner;
     private System.Windows.Forms.Label lblPrestige;
+    private System.Windows.Forms.Label lblNextPrestigeCost;
+    private System.Windows.Forms.Label lblNextPrestigeCostLabel;
     private System.Windows.Forms.Label lblMoneySaved;
     private System.Windows.Forms.Label lblMoneySavedLabel;
     private System.Windows.Forms.Label lblMoneyFeed1;

@@ -153,12 +153,16 @@ namespace AttackOfTheKarens {
             this.Width = panMall.Width + FORM_PADDING + 75;
             this.Height = panMall.Height + FORM_PADDING;
             this.Left = this.Left - 200;
+            lblNextPrestigeCostLabel.Left = this.Width - 300;
+            lblNextPrestigeCost.Left = this.Width - 300;
             lblPrestige.Left = this.Width - 300;
             lblMoneySaved.Left = this.Width - 300;
             lblMoneySavedLabel.Left = this.Width - 300;
+            lblNextPrestigeCostLabel.Top = this.Height - 170;
+            lblNextPrestigeCost.Top = this.Height - 150;
             lblPrestige.Top = this.Height - 100;
             lblMoneySavedLabel.Top = 25;
-            lblMoneySaved.Top = lblMoneySavedLabel.Height + 30;
+            lblMoneySaved.Top = lblMoneySavedLabel.Height + 20;
             feedLabels[0] = lblMoneyFeed1;
             feedLabels[1] = lblMoneyFeed2;
             feedLabels[2] = lblMoneyFeed3;
@@ -382,6 +386,7 @@ namespace AttackOfTheKarens {
         private void tmrUpdateGame_Tick(object sender, EventArgs e) {
             lblMoneySaved.Text = Game.Score.ToString("$ #,##0.00");
             lblPrestige.Text = "Prestige: " + Game.PrestigeLevel;
+            lblNextPrestigeCost.Text = Game.PrestigeMenuCondition.ToString("$ #,##0.00");
         }
 
         private void panMall_Paint(object sender, PaintEventArgs e) { }

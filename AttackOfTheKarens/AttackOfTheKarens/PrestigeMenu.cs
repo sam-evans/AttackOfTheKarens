@@ -86,9 +86,24 @@ namespace AttackOfTheKarens
             Game.PrestigeMenuCondition *= 10;
             Game.PrestigeLevel++;
             Game.Score = 0;
+            Game.BonusCash = 0;
+            Store._damage = 1;
 
             FrmMall.UpdateLabels();
             FrmMall.TurnOnFireworks();
+            
+        }
+        public static int i = 0;
+        public static bool isPrestiged()
+        {
+            if (Game.PrestigeLevel > i){
+                i = Game.PrestigeLevel;
+                return true;
+                
+            }
+            return false;
+                
+            
         }
 
         private void PrestigeNotEnoughMoneyText_Click(object sender, EventArgs e)

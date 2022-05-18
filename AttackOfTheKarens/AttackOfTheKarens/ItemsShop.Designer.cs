@@ -56,6 +56,7 @@
             this.OwnerSpeedIncreaseButton.Name = "OwnerSpeedIncreaseButton";
             this.OwnerSpeedIncreaseButton.Size = new System.Drawing.Size(86, 31);
             this.OwnerSpeedIncreaseButton.TabIndex = 13;
+            this.OwnerSpeedIncreaseButton.Click += new System.EventHandler(this.OwnerSpeedIncreaseButton_Click);
             // 
             // BetterSuccessAgainstKarenButton
             // 

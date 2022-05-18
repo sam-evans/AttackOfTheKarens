@@ -39,7 +39,7 @@ namespace KarenLogic {
         public void ResetOwner() { containsOwner = false; }
 
         //update karen hp
-        public int _damage = 1;
+        public static int _damage = 1;
         public int GetUpdate() { return _damage; }
         public void setUpdate(int d)
         {

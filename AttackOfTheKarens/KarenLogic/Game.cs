@@ -19,7 +19,7 @@ namespace KarenLogic {
             PrestigeMoneyMultiplier = 1;
             PrestigeMenuCondition = 15f;
             PrestigeDamageMultiplier = 1;
-            BonusCash = 5f;
+            BonusCash = 0f;
         }
 
         public static void AddToScore(float amount) { Score += amount; }
